@@ -12,7 +12,14 @@ Desenvolver um sistema causal e verificável de análise harmônica para estimar
 
 ## Estado do projeto
 
-O repositório está em baseline documental. A FASE 0 (reconhecimento e definição inicial) foi concluída. A FASE 1 (núcleo matemático Python) é a próxima etapa. Ainda não há indicador certificado nem integração operacional.
+Baseline Python 0.2.0: primitivas matemáticas iniciais implementadas (FFT, regressão harmônica, amplitude/fase, energia e entropia) com testes sintéticos. A execução integral da suíte no GitHub Actions é o próximo mecanismo de validação automatizada. Não há certificação com dados reais nem indicador operacional.
+
+## Instalação e testes
+
+```bash
+python -m pip install -e ".[dev]"
+python -m pytest -q
+```
 
 ## Princípios
 
