@@ -26,7 +26,9 @@ Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; PARSER XLSX IMPLE
 - 13.390 registos OHLC em 147 sessões, com contador contínuo por sessão.
 - Parser XLSX offline implementado; exige timezone explícito, mantém semântica temporal UNKNOWN e não infere trade_count/volume.
 - A amostra não contém trade_count nem volume explícito; portanto, não comprova 60.000 negócios por barra.
-- 27 timestamps repetidos com precisão apenas ao minuto; 6.908 registos têm pelo menos um OHLC não múltiplo de 5.
+- 27 timestamps repetidos com precisão apenas ao minuto; 10.511 registos têm pelo menos um OHLC não múltiplo de 5 (recontagem decimal).
+- Timezone da coluna Data confirmado pelo utilizador: America/Sao_Paulo; leitura validada em 13.390 registos sem erros.
+- Semântica do timestamp permanece UNKNOWN: ainda não foi confirmado se Data representa abertura ou fecho da barra.
 - Requer reconciliação da origem dos preços, semântica temporal, volume e contagem de negócios antes da certificação do adaptador.
 - Não confundir volume financeiro, quantidade de contratos e número de negócios.
 - COTAHIST é dado diário consolidado e não substitui a série intradiária.
