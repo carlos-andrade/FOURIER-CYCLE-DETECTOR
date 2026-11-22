@@ -179,6 +179,11 @@ def fes(values: Iterable[float], window: int = 128, min_period: int = 8,
         "slow": (max(min_period, 2 * (min_period + max_period) // 3 + 1),
                  max_period),
     }
+    for name, (low_period, high_period) in definitions.items():
+        if low_period < min_period or high_period > max_period:
+            raise ValueError(f"period band outside configured range: {name}")
+        if high_period < low_period:
+            raise ValueError(f"invalid period band: {name}")
     size = x.size
     total = np.full(size, np.nan)
     entropy = np.full(size, np.nan)
@@ -199,8 +204,6 @@ def fes(values: Iterable[float], window: int = 128, min_period: int = 8,
         concentration[end] = float(probabilities.max())
         total[end] = energy
         for name, (low_period, high_period) in definitions.items():
-            if low_period < 2 or high_period < low_period:
-                raise ValueError(f"invalid period band: {name}")
             band = (frequencies >= 1.0 / high_period) & (
                 frequencies <= 1.0 / low_period
             )
