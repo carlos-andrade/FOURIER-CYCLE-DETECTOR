@@ -58,7 +58,7 @@ A deeper Decimal-based grouping by session found a sharply segmented pattern:
 - Of the 10,511 affected bars, 10,443 have all four OHLC fields outside the 5-point grid; 68 have two or three affected fields.
 - All 2,879 bars in the later interval have all four OHLC fields divisible by 5.
 
-This is evidence of a temporal representation/regime break, not proof of its cause or proof that earlier prices are invalid. Possible explanations remain unverified. Do not round, rescale or rewrite source OHLC values. Reconcile source instrument/expiry, historical adjustment, export configuration and any transformation before certification.
+This is evidence of a temporal representation/regime break, not proof of its cause or proof that earlier prices are invalid. At the boundary, the final close on 2026-10-13 is 210,690.00 and the first open on 2026-10-14 is 210,500.00: the nominal price scale remains similar, so the observation does not look like a simple 1,000x unit conversion. This does not identify the cause or rule out other transformations. Do not round, rescale or rewrite source OHLC values. Reconcile source instrument/expiry, historical adjustment, export configuration and any transformation before certification.
 
 ## Interpretation
 
@@ -66,14 +66,17 @@ The workbook supports an initial structural audit of OHLC records and per-sessio
 
 ## B3 source interpretation
 
-Reviewed private project contracts:
-- CONTRATO_DADOS_B3_V2.0.md
-- CONTRATO_CANONICO_INGESTAO_FONTES_EXTERNAS_V2.0.md
-- ARQUITETURA_DUAL_COTAHIST_NEGOCIOS_INTRADIARIOS_2026-11-05.md
-- PROVEDORES_E_GRANULARIDADE.md
-- ativos/futuros/README.md
+Reopened B3 repository references:
+- [CONTRATO_DADOS_B3_V2.0.md](https://github.com/carlos-andrade/B3/blob/main/docs/ingestao/CONTRATO_DADOS_B3_V2.0.md)
+- [CONTRATO_CANONICO_INGESTAO_FONTES_EXTERNAS_V2.0.md](https://github.com/carlos-andrade/B3/blob/main/docs/ingestao/CONTRATO_CANONICO_INGESTAO_FONTES_EXTERNAS_V2.0.md)
+- [ARQUITETURA_DUAL_COTAHIST_NEGOCIOS_INTRADIARIOS_2026-11-05.md](https://github.com/carlos-andrade/B3/blob/main/docs/ingestao/ARQUITETURA_DUAL_COTAHIST_NEGOCIOS_INTRADIARIOS_2026-11-05.md)
+- [PARTE03_B3_INTRADAY_CONTRATO_V1.0.md](https://github.com/carlos-andrade/B3/blob/main/docs/ingestao/PARTE03_B3_INTRADAY_CONTRATO_V1.0.md)
+- [PARTE03_B3_NEGOCIO_A_NEGOCIO_ESPECIFICACAO_V1.0.md](https://github.com/carlos-andrade/B3/blob/main/docs/ingestao/PARTE03_B3_NEGOCIO_A_NEGOCIO_ESPECIFICACAO_V1.0.md)
+- [ativos/futuros/README.md](https://github.com/carlos-andrade/B3/blob/main/ativos/futuros/README.md)
 
-COTAHIST is daily consolidated data, not tick-by-tick. Trade events and order-book feeds have separate contracts and granularities. Tick direction is not treated as aggressor side. UMDF, FIX/FAST, historical replay and other channels require independent entitlement evidence.
+The B3 V2 instrument contract requires instrument identity from an official identifier/source with temporal validity; contract expiry, multiplier, tick size, currency, segment and status are versioned attributes. A ticker or generic symbol alone is not a key. The inspected B3 futures catalogue currently supplies only the category-level README, not a WINFUT contract record with a dated tick-size value. Therefore this workbook cannot yet be matched to a specific instrument/expiry or certified against an authoritative tick size.
+
+The B3 dual-ingestion architecture distinguishes daily consolidated COTAHIST from intraday trade events. COTAHIST is not a tick-by-tick substitute. Trade events and order-book feeds have separate contracts and granularities. Tick direction is not treated as aggressor side. UMDF/FIX/FAST and historical replay require independent entitlement evidence.
 
 ## Not certified
 
