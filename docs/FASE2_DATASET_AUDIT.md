@@ -26,7 +26,7 @@
 - Registos por sessão: mínimo 42, mediana 87, máximo 158.
 - Existem 27 timestamps repetidos. A precisão temporal exportada é de minuto; não há segundos registados.
 - Os intervalos intrassessão são variáveis: mediana 4 minutos, média aproximada 6,06 minutos.
-- 6.908 registos apresentam pelo menos um campo OHLC que não é múltiplo de 5.
+- 10.511 registos apresentam pelo menos um campo OHLC que não é múltiplo de 5 (recontagem por Decimal, sem tolerância de ponto flutuante).
 
 ## Adaptador offline implementado
 
@@ -39,6 +39,22 @@
 - trade_count, volume e volume financeiro permanecem ausentes quando não estão na exportação.
 - O SHA-256 do ficheiro de origem é preservado em cada MarketBar.
 - Dependência XLSX isolada no extra opcional `excel`.
+
+## Execução de leitura com timezone confirmado
+
+- Timezone confirmado pelo utilizador para a coluna Data: `America/Sao_Paulo`.
+- Leitura da folha `Folha1` com a mesma seleção de seis colunas e regras de parsing documentadas no adaptador.
+- Registos processados: 13.390.
+- Erros de parsing/OHLC/contador: 0.
+- Primeiro timestamp normalizado: 2026-04-22 09:04:00 -03:00.
+- Último timestamp normalizado: 2026-11-19 18:07:00 -03:00.
+- Timestamps repetidos: 27 grupos, todos preservados e ordenados pelo contador de origem.
+- Contador: sequência de 1 até ao número de registos da sessão, sem lacunas, nas 147 sessões.
+- Semântica temporal mantida como UNKNOWN; a confirmação do timezone não determina se Data é abertura ou fecho da barra.
+- trade_count, volume e volume financeiro continuam NULL, pois não existem colunas-fonte correspondentes.
+- SHA-256 confirmado: `5e0005c96f3642aa7dbf956cee62883a042057a6eb08b16b084537b266639c7f`.
+
+A recontagem corrigiu o valor anterior de 6.908 para 10.511 registos com pelo menos um OHLC não múltiplo de 5. Esta diferença é uma correção da auditoria, não uma alteração dos dados originais.
 
 ## Interpretação e bloqueios
 
