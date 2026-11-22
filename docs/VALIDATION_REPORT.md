@@ -21,6 +21,7 @@
 - Platform: Profit One.
 - Chart: 60K Trades.
 - This is the user-confirmed target configuration for the project.
+- Project default configuration and package metadata now target 60K Trades bars; stale Renko 30R defaults were removed from README, mathematical model, technical specification, package metadata and market-data granularity enum.
 
 ## Initial inspection of the user-provided WINFUT workbook
 
@@ -32,7 +33,16 @@
 - 27 timestamps repeat; exported precision is minute-level.
 - 6,908 rows have at least one OHLC value that is not a multiple of 5.
 - No explicit trade_count or volume column was identified. Two indicator columns, BMFB_001 and BMFB_002, are entirely empty.
-- Detailed findings and limitations: docs/FASE2_DATASET_AUDIT.md.
+- Detailed findings: docs/FASE2_DATASET_AUDIT.md.
+
+## Offline XLSX bar model and adapter
+
+- Added MarketBar with typed OHLC, source counter, timestamp semantics, optional trade_count/volume and raw-file SHA-256.
+- Added iter_profit_one_xlsx, reading only the six source OHLC/counter columns and ignoring indicator outputs.
+- The adapter requires an explicit IANA timezone and leaves timestamp semantics UNKNOWN unless supplied by the caller.
+- It does not infer trade_count, volume, instrument tick size or 60K compliance.
+- Added optional `excel` dependency and CI coverage.
+- CI SUCCESS: run 45072681348, commit 602b8e07438d84f302cb0d625b4bb76aa6748c5e (2026-11-22); 36 tests passed.
 
 ## Interpretation
 
