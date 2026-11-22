@@ -49,6 +49,17 @@
 - CI SUCCESS: run 45072681348, commit 602b8e07438d84f302cb0d625b4bb76aa6748c5e (2026-11-22); 36 tests passed.
 - Latest documentation commit CI SUCCESS: run 45073501971, commit 5360d193daf6c0c991e713277b63ba6b9e4b26c2.
 
+## Temporal price-grid regime check
+
+A deeper Decimal-based grouping by session found a sharply segmented pattern:
+
+- 2026-04-22 through 2026-10-13: 121 sessions and 10,511 bars; every bar in this interval has at least one OHLC value not divisible by 5.
+- 2026-10-14 through 2026-11-19: 26 sessions and 2,879 bars; no OHLC field in these bars violates divisibility by 5.
+- Of the 10,511 affected bars, 10,443 have all four OHLC fields outside the 5-point grid; 68 have two or three affected fields.
+- All 2,879 bars in the later interval have all four OHLC fields divisible by 5.
+
+This is evidence of a temporal representation/regime break, not proof of its cause or proof that earlier prices are invalid. Possible explanations remain unverified. Do not round, rescale or rewrite source OHLC values. Reconcile source instrument/expiry, historical adjustment, export configuration and any transformation before certification.
+
 ## Interpretation
 
 The workbook supports an initial structural audit of OHLC records and per-session candle counter continuity. It does not prove that each bar contains 60,000 trades. It does not provide explicit trade count or volume for reconciliation. Price tick conformity, timestamp semantics, instrument/contract identity, session boundaries and incomplete-bar behavior remain unresolved. The indicator output columns are not treated as primary market data.
