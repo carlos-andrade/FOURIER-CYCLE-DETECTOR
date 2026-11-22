@@ -13,11 +13,12 @@ Engine research for causal Fourier/harmonic market-state analysis, initially foc
 
 ## Data sources
 For Brazilian exchange data contracts, provenance and access boundaries, the primary project reference is the private repository [carlos-andrade/B3](https://github.com/carlos-andrade/B3). See `docs/B3_DATA_REFERENCE.md`.
-The implementation in `src/fourier_gyroscope/market_data` is offline-only and accepts local files. It does not connect to UMDF or distributors and does not acquire data.
+The implementation in `src/fourier_gyroscope/market_data` is offline-only and accepts local files. It includes typed trade events, OHLC bars, a CSV trade-event adapter and a Profit One XLSX bar adapter. It does not connect to UMDF or distributors and does not acquire data.
 
 ## Current components
 - Mathematical core: FFT, harmonic regression and spectral diagnostics.
-- Market data boundary: typed instruments/trade events, explicit aggressor provenance, sequence continuity audit and CSV local adapter.
+- Market data boundary: typed instruments, trade events and OHLC bars; explicit aggressor provenance; sequence continuity audit.
+- Local adapters: CSV trade-event input and Profit One XLSX OHLC/counter input. The XLSX adapter requires an explicit IANA timezone and does not infer trade count or volume.
 - Automated tests: mathematical, causality and market-data contracts.
 
 ## Project status
