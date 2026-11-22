@@ -1,7 +1,7 @@
 # Modelo matemático
 
 ## Série de entrada
-Para fechamento P_t, retorno em pontos r_t=P_t-P_(t-1). Frequências sobre sequência Renko são ciclos por tijolo, não ciclos por segundo/minuto.
+Para fechamento P_t, retorno em pontos r_t=P_t-P_(t-1). Frequências sobre a sequência de barras 60K Trades são ciclos por barra, não ciclos por segundo/minuto. Como a duração temporal das barras pode variar, a série indexada por barras não deve ser interpretada como amostragem temporal uniforme.
 
 ## DFT
 X_k = sum(x_n * exp(-i*2*pi*k*n/N)). A potência implementada é |X_k|². A amplitude unilateral é corrigida pelo ganho coerente da janela Hann; DC e Nyquist não são duplicados. A seleção do ciclo dominante exclui DC e respeita os limites de frequência configurados.
@@ -15,11 +15,11 @@ p_k=power_k/sum(power). H=-sum(p_k*ln(p_k))/ln(M), para M bins selecionados. Est
 
 ## Convenções implementadas em Python 0.2.0
 - FFT real via numpy.fft.rfft.
-- Frequência em ciclos por amostra; para Renko, ciclos por tijolo.
+- Frequência em ciclos por amostra; no projeto, uma amostra corresponde a uma barra 60K Trades fechada.
 - Amplitude de pico corrigida pelo ganho coerente da janela.
 - Power é magnitude ao quadrado dos coeficientes DFT da série janelada; é uma medida relativa sob mesmo tamanho/janela, não uma PSD calibrada.
 - Regressão harmônica por mínimos quadrados com intercepto.
 - Entropia normalizada e concentração máxima da energia relativa, calculadas na banda selecionada.
 
 ## Limitações
-Séries financeiras são não estacionárias. Estimativas dependem da janela, detrending e faixa de frequência. Pico espectral não prova ciclo persistente nem prevê reversão. Entropia e concentração descrevem a distribuição de energia; não são, isoladamente, critérios de confiabilidade. É obrigatório validar fora da amostra.
+Séries financeiras são não estacionárias. Estimativas dependem da janela, detrending e faixa de frequência. A duração variável das barras introduz irregularidade no eixo cronológico; análises em ciclos por barra e ciclos por unidade de tempo são problemas distintos. Pico espectral não prova ciclo persistente nem prevê reversão. Entropia e concentração descrevem a distribuição de energia; não são, isoladamente, critérios de confiabilidade. É obrigatório validar fora da amostra.
