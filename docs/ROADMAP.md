@@ -1,34 +1,24 @@
 # Roadmap
 
 ## FASE 0 — Reconhecimento e baseline
-Estado: CONCLUÍDA. Repositório reconhecido; licença MIT e commit inicial preservados; escopo e princípios registrados.
+CONCLUÍDA: repositório reconhecido, licença MIT preservada, governança e arquitetura inicial documentadas.
 
 ## FASE 1 — Núcleo matemático Python
-Estado: PRÓXIMA. Implementar DFT/FFT, janelamento, regressão harmônica, fase, amplitude, energia e entropia; criar testes sintéticos de referência.
+EM IMPLEMENTAÇÃO: FFT, regressão harmônica, amplitude/fase e métricas espectrais implementadas em baseline 0.2.0; testes sintéticos iniciais adicionados. Pendentes testes avançados, revisão e execução reproduzível da suíte.
 
-Critério de saída: testes matemáticos e casos degenerados aprovados.
+Critério de saída: testes matemáticos de referência e casos degenerados aprovados.
 
 ## FASE 2 — Dados WINFUT Renko 30R
-Criar adaptador e validar contrato com exportações reais do Profit; documentar regra Renko, timestamps, volume e origem.
-
-Critério: histórico real validado e reproduzível.
+Adaptador e validação do contrato com exportações reais do Profit. Documentar regra Renko, timestamps, volume e origem.
 
 ## FASE 3 — Indicadores e FGSE
 Implementar FCD, FHO, FES, FED, FRC e agregador FGSE.
 
-Critério: integração e estados reproduzíveis.
-
 ## FASE 4 — Validação estatística
 Causalidade, estabilidade, walk-forward, falsos positivos e análise econômica com custos.
 
-Critério: relatório fora da amostra e limitações documentadas.
-
 ## FASE 5 — NTSL
-Portar componentes viáveis; comparar NTSL com referência Python e validar no Profit Pro.
-
-Critério: tolerâncias numéricas previamente definidas e testes operacionais aprovados.
+Portar componentes viáveis e comparar NTSL com referência Python; validar no Profit Pro.
 
 ## FASE 6 — Integração controlada com BrickMaster
-Somente após certificação; inicialmente modo observacional/simulação, sem envio de ordens.
-
-Critério: interface validada e aprovação específica da integração.
+Somente após certificação; inicialmente observacional/simulação, sem envio de ordens.

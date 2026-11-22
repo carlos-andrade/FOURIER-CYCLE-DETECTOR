@@ -1,6 +1,2 @@
-"""FOURIER GYROSCOPE research engine.
-
-No trading or order-execution functionality is provided in this package.
-"""
-
-__version__ = "0.1.0"
+"""FOURIER GYROSCOPE research engine; no order execution."""
+__version__ = "0.2.0"

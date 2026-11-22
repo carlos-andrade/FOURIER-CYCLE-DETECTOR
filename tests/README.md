@@ -1,3 +1,7 @@
 # Test suite
 
-Organize tests by unit, integration, mathematical properties, regression, causality and fixtures. The first implementation task must add synthetic reference signals and verify frequency, amplitude, phase convention, entropy edge cases and causal invariance.
+Run: `python -m pytest`.
+
+Initial reference coverage includes FFT frequency/period recovery, Hann amplitude normalization, constant-signal rejection, invalid inputs, harmonic amplitude/phase/offset recovery, spectral entropy bounds, zero-energy handling and a prefix-invariance regression test.
+
+These tests validate deterministic mathematical primitives only. They do not establish predictive value or trading performance.
