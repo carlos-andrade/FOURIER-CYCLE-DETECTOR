@@ -47,7 +47,9 @@
 - It does not infer trade_count, volume, instrument tick size or 60K compliance.
 - Added optional `excel` dependency and CI coverage.
 - CI SUCCESS: run 45072681348, commit 602b8e07438d84f302cb0d625b4bb76aa6748c5e (2026-11-22); 36 tests passed.
-- Latest test-suite CI SUCCESS: run [45075958293](https://github.com/carlos-andrade/FOURIER-CYCLE-DETECTOR/actions/runs/45075958293), commit `fcf0352475a4860f7b7fdddb3337f549c250f7d9`; 37 tests passed. The preceding run 45075888081 failed because the newly added test fixture violated OHLC bounds; the fixture was corrected and the subsequent full suite passed. The latest documentation-only commits do not change executable code.
+- Test-suite CI SUCCESS: run [45075958293](https://github.com/carlos-andrade/FOURIER-CYCLE-DETECTOR/actions/runs/45075958293), commit `fcf0352475a4860f7b7fdddb3337f549c250f7d9`; 37 tests passed. The preceding run 45075888081 failed because a new test fixture violated OHLC bounds; the fixture was corrected and the subsequent full suite passed.
+- Candidate price-grid diagnostic added in `market_data/price_grid.py`; it groups OHLC conformity by local calendar date, counts affected bars/fields and never changes source prices. It requires a caller-supplied candidate increment and does not certify the official tick size.
+- Latest full CI SUCCESS: run [45078417762](https://github.com/carlos-andrade/FOURIER-CYCLE-DETECTOR/actions/runs/45078417762), commit `8215e8a1e5b18fb003db99cb62505997e14fa830`; **42 tests passed**. This includes the five new price-grid audit tests.
 
 ## Temporal price-grid regime check
 
