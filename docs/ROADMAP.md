@@ -48,12 +48,12 @@ Estado: ABERTA; BLOQUEADA POR EVIDÊNCIA EXTERNA À AMOSTRA ATUAL.
 - Não certificar a FASE 2 até fechar os gates definidos no plano.
 
 ## FASE 3 — FCD, FHO, FES, FED, FRC e Fourier Gyroscope
-Estado: V1 DE REFERÊNCIA IMPLEMENTADA; VALIDAÇÃO CI E ROBUSTEZ AMPLIADA PENDENTES.
+Estado: V1 DE REFERÊNCIA IMPLEMENTADA; CORREÇÃO DO FED EM VALIDAÇÃO CI; CERTIFICAÇÃO PENDENTE.
 - Primeira implementação integrada em `src/fourier_gyroscope/indicators_v1.py`.
 - FCD: frequência dominante, período em candles e quota de potência do pico.
 - FHO: amplitude, fase e oscilador harmónico ajustado na frequência dominante.
 - FES: potência total, entropia normalizada, concentração e quotas por banda.
-- FED: deteção de mudança relativa de frequência e colapso de amplitude.
+- FED: mudança relativa de frequência por comparação adjacente e colapso de amplitude por comparação com referência de 64 candles (configurável), para compensar a suavização do FHO de 128 candles; atraso de deteção é medido nos testes.
 - FRC: estados descritivos com warm-up, transição, ruído, ciclo persistente e ciclo não identificável.
 - Especificação e limitações: `docs/FOURIER_INDICATORS_V1.md`.
 - Testes determinísticos ampliados: dois tons, degrau de frequência, colapso de amplitude, ruído branco, abstenção em energia nula, bandas inválidas e prefix-invariance: `tests/test_indicators_v1.py`.
@@ -61,7 +61,8 @@ Estado: V1 DE REFERÊNCIA IMPLEMENTADA; VALIDAÇÃO CI E ROBUSTEZ AMPLIADA PENDE
 - CI ajustada para executar a árvore completa `tests/`, incluindo os testes top-level dos indicadores.
 - Esta V1 é referência Python experimental; não está certificada, não tem port NTSL e não foi validada candle a candle no Profit One.
 - Frequências em ciclos por candle; períodos em candles. Nenhuma hipótese de tempo de calendário uniforme.
-- Próxima etapa: CI completa, expansão da matriz de sinais sintéticos e quantificação de erro, leakage, deriva e falsos positivos.
+- CI da PR #7 encontrou 1 falha em 53 testes: o FED não detetava colapso de amplitude ao comparar amplitudes FHO apenas em candles consecutivos; 52 testes passaram. Correção proposta: referência de amplitude com lag de 64 candles e teste explícito do atraso máximo neste cenário sintético.
+- Próxima etapa: executar CI completa após a correção; depois quantificar erro, leakage, deriva e falsos positivos na matriz sintética.
 
 ## FASE 4 — Validação estatística dos indicadores
 Estabilidade espectral, resolução, leakage, erro de período/amplitude/fase, falsos positivos, abstenção, ruído, deriva de frequência, não estacionariedade e causalidade. Não é backtest de rentabilidade.
