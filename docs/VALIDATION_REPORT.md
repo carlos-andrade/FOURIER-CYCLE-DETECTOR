@@ -21,7 +21,22 @@
 - Platform: Profit One.
 - Chart: 60K Trades.
 - This is the user-confirmed target configuration for the project.
-- The repository has not yet validated a real export from this chart.
+
+## Initial inspection of the user-provided WINFUT workbook
+
+- Workbook: FASE 2 — WINFUT.xlsx; sheet Folha1; 13,390 data rows and 65 columns.
+- SHA-256: 5e0005c96f3642aa7dbf956cee62883a042057a6eb08b16b084537b266639c7f.
+- Observed period: 2026-04-22 09:04 through 2026-11-19 18:07; 147 sessions.
+- OHLC completeness and internal high/low/open/close consistency passed the initial structural checks.
+- Candle counter restarts at 1 and is continuous within all 147 sessions.
+- 27 timestamps repeat; exported precision is minute-level.
+- 6,908 rows have at least one OHLC value that is not a multiple of 5.
+- No explicit trade_count or volume column was identified. Two indicator columns, BMFB_001 and BMFB_002, are entirely empty.
+- Detailed findings and limitations: docs/FASE2_DATASET_AUDIT.md.
+
+## Interpretation
+
+The workbook supports an initial structural audit of OHLC records and per-session candle counter continuity. It does not prove that each bar contains 60,000 trades. It does not provide explicit trade count or volume for reconciliation. Price tick conformity, timestamp semantics, instrument/contract identity, session boundaries and incomplete-bar behavior remain unresolved. The indicator output columns are not treated as primary market data.
 
 ## B3 source interpretation
 
@@ -36,8 +51,9 @@ COTAHIST is daily consolidated data, not tick-by-tick. Trade events and order-bo
 
 ## Not certified
 
-- No real Profit One 60K Trades export has been inspected.
-- Per-bar trade counts, timestamps, OHLC, volume semantics, session boundaries and incomplete-bar behavior remain to be validated against an authorized export.
+- The 60K Trades per-bar construction has not been empirically certified.
+- OHLC price tick semantics have not been reconciled to the underlying instrument/export.
+- No explicit per-bar trade_count or volume field has been validated.
 - No real-time provider connection exists.
 - No acquisition, storage licence, retention right or redistribution right is inferred.
 - No profitability or operational performance claim is made.
