@@ -1,5 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
+from zoneinfo import ZoneInfo
 
 import pytest
 from openpyxl import Workbook
@@ -15,7 +16,7 @@ def make_bar(**changes):
         instrument_id="WINFUT_TEST",
         bar_index=1,
         source_counter=1,
-        bar_timestamp=datetime(2026, 1, 1, 9, 0).astimezone(),
+        bar_timestamp=datetime(2026, 1, 1, 9, 0, tzinfo=ZoneInfo("America/Sao_Paulo")),
         timestamp_semantics=BarTimestampSemantics.UNKNOWN,
         open=Decimal("100"),
         high=Decimal("105"),
@@ -64,8 +65,39 @@ def test_profit_one_xlsx_adapter_sorts_bars_and_preserves_missing_trade_count(tm
     assert [bar.source_counter for bar in bars] == [1, 2]
     assert bars[0].bar_timestamp.hour == 9
     assert bars[0].bar_timestamp.minute == 0
+    assert bars[0].bar_timestamp.utcoffset().total_seconds() == -3 * 3600
     assert all(bar.trade_count is None and bar.volume is None for bar in bars)
     assert all(bar.raw_sha256 and len(bar.raw_sha256) == 64 for bar in bars)
+
+
+def test_profit_one_xlsx_adapter_preserves_decimal_prices_and_minute_duplicates(tmp_path):
+    path = tmp_path / "decimal-duplicates.xlsx"
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.append(["Data", "Abertura", "Máxima", "Mínima", "Fechamento", "Contador de Candles"])
+    # Deliberately reverse the source counter within the same minute.
+    sheet.append([datetime(2026, 4, 22, 9, 4), 211679.50, 211700.25, 211650.75, 211472.17, 2])
+    sheet.append([datetime(2026, 4, 22, 9, 4), 212232.37, 212300.11, 212200.93, 211955.93, 1])
+    workbook.save(path)
+
+    bars = list(iter_profit_one_xlsx(
+        path,
+        source_id="PROFIT_ONE",
+        dataset_id="DECIMAL_FIXTURE",
+        instrument_id="WINFUT_TEST",
+        timezone_name="America/Sao_Paulo",
+        sheet_name="Sheet",
+    ))
+
+    assert [bar.source_counter for bar in bars] == [1, 2]
+    assert bars[0].open == Decimal("212232.37")
+    assert bars[0].high == Decimal("212300.11")
+    assert bars[0].low == Decimal("212200.93")
+    assert bars[0].close == Decimal("211955.93")
+    assert bars[0].bar_timestamp.utcoffset().total_seconds() == -3 * 3600
+    assert bars[0].timestamp_precision == "MINUTE"
+    assert all(bar.timestamp_semantics is BarTimestampSemantics.UNKNOWN for bar in bars)
+    assert all(bar.trade_count is None and bar.volume is None for bar in bars)
 
 
 def test_profit_one_xlsx_adapter_requires_explicit_timezone(tmp_path):
