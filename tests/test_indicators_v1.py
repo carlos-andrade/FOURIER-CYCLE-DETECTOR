@@ -94,7 +94,11 @@ def test_amplitude_collapse_is_detected():
     cycle = fcd(x, window=128, min_period=8, max_period=64)
     harmonic = fho(x, window=128, min_period=8, max_period=64)
     events = fed(cycle, harmonic)
-    assert np.any(events.event[256:400] == "AMPLITUDE_COLLAPSE")
+    detected = np.flatnonzero(events.event[256:400] == "AMPLITUDE_COLLAPSE")
+    assert detected.size > 0
+    # The 128-bar FHO fit smooths the step; the 64-bar reference
+    # detects the resulting sustained amplitude loss with bounded delay.
+    assert 256 + detected[0] <= 320
 
 
 def test_white_noise_has_finite_bounded_spectral_metrics():
