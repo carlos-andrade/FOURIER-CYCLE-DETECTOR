@@ -94,3 +94,17 @@ O adaptador é um parser de ingestão offline e não uma certificação da fonte
 4. Explicar a ocorrência de OHLC não múltiplo de 5 e reconciliar com os dados originais.
 5. Definir o tratamento das barras iniciais/finais de sessão e das barras incompletas.
 6. Só depois converter amostra autorizada em fixtures de teste de integração e certificar o adaptador.
+
+
+## Auditoria reproduzível da grelha candidata
+
+Foi acrescentado `audit_candidate_price_grid` em `src/fourier_gyroscope/market_data/price_grid.py`.
+
+- Recebe um incremento candidato explícito como `Decimal`; não assume que esse incremento é o tick oficial do instrumento.
+- Agrupa as barras pela data local do timestamp já normalizado.
+- Conta barras afetadas e campos OHLC não conformes por sessão.
+- Preserva os valores originais; não arredonda, reescala ou corrige preços.
+- Não infere calendários de sessões overnight. Para esses mercados, a data de sessão deve ser fornecida por uma camada de calendário explícita.
+- A saída é diagnóstico descritivo, não certificação de tick size ou validade do instrumento.
+
+Testes sintéticos cobrem a segmentação entre sessões, contagem por campo, rejeição de incrementos inválidos e imutabilidade dos OHLC. A aprovação CI desta alteração fica pendente até execução do workflow.
