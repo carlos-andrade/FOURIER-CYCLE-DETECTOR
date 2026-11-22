@@ -47,14 +47,25 @@ Estado: ABERTA; BLOQUEADA POR EVIDÊNCIA EXTERNA À AMOSTRA ATUAL.
 - Não alterar OHLC nem inferir trade_count, volume, tick oficial ou semântica temporal.
 - Não certificar a FASE 2 até fechar os gates definidos no plano.
 
-## FASE 3 — FCD, FHO, FES, FED, FRC e FGSE
-Implementar estados com abstenção explícita, qualidade, causalidade e validade.
+## FASE 3 — FCD, FHO, FES, FED, FRC e Fourier Gyroscope
+Estado: V1 DE REFERÊNCIA IMPLEMENTADA; VALIDAÇÃO CI E ROBUSTEZ AMPLIADA PENDENTES.
+- Primeira implementação integrada em `src/fourier_gyroscope/indicators_v1.py`.
+- FCD: frequência dominante, período em candles e quota de potência do pico.
+- FHO: amplitude, fase e oscilador harmónico ajustado na frequência dominante.
+- FES: potência total, entropia normalizada, concentração e quotas por banda.
+- FED: deteção de mudança relativa de frequência e colapso de amplitude.
+- FRC: estados descritivos com warm-up, transição, ruído, ciclo persistente e ciclo não identificável.
+- Especificação e limitações: `docs/FOURIER_INDICATORS_V1.md`.
+- Testes iniciais determinísticos e prefix-invariance: `tests/test_indicators_v1.py`.
+- Esta V1 é referência Python experimental; não está certificada, não tem port NTSL e não foi validada candle a candle no Profit One.
+- Frequências em ciclos por candle; períodos em candles. Nenhuma hipótese de tempo de calendário uniforme.
+- Próxima etapa: CI completa, expansão da matriz de sinais sintéticos e quantificação de erro, leakage, deriva e falsos positivos.
 
-## FASE 4 — Validação estatística
-Walk-forward, análise fora da amostra, estabilidade, falsos positivos, custos e slippage.
+## FASE 4 — Validação estatística dos indicadores
+Estabilidade espectral, resolução, leakage, erro de período/amplitude/fase, falsos positivos, abstenção, ruído, deriva de frequência, não estacionariedade e causalidade. Não é backtest de rentabilidade.
 
 ## FASE 5 — NTSL
 Portar somente componentes com equivalência numérica testável em relação ao Python.
 
-## FASE 6 — Integração controlada BrickMaster
-Apenas após certificação; inicialmente observacional/simulação, sem envio de ordens.
+## FASE 6 — Integração analítica controlada
+Integração visual/observacional dos indicadores após certificação e autorização explícita. Não inclui execução de ordens.
