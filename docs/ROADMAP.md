@@ -4,9 +4,10 @@
 Estado: CONCLUÍDA. Repositório reconhecido; licença MIT e commit inicial preservados; escopo e princípios registrados.
 
 ## FASE 1 — Núcleo matemático Python
-Estado: EM IMPLEMENTAÇÃO. Primitivas FFT, regressão harmônica, fase, amplitude, energia e entropia implementadas. Bateria inicial aprovada; bateria ampliada de robustez adicionada e aguardando CI.
+Estado: EM IMPLEMENTAÇÃO. Primitivas FFT, regressão harmônica, fase, amplitude, energia e entropia implementadas. Baterias inicial e ampliada aprovadas no CI.
 
 ### FASE 1.1 — Robustez sintética
+Estado: CONCLUÍDA EM TESTES SINTÉTICOS.
 - Multi-frequência.
 - Ruído.
 - Modulação de amplitude.
@@ -14,7 +15,13 @@ Estado: EM IMPLEMENTAÇÃO. Primitivas FFT, regressão harmônica, fase, amplitu
 - Mudança de regime.
 - Sensibilidade à janela.
 
-Critério de saída: todos os testes passarem no CI e limitações documentadas.
+### FASE 1.2 — Métricas espectrais por banda
+Estado: IMPLEMENTADA; CI pendente.
+- Restringir energia, entropia e concentração à banda efetivamente analisada.
+- Validar limites de frequência e degenerescência.
+- Não converter concentração/entropia em veredito automático de ciclo.
+
+Critério de saída: CI verde e documentação das limitações.
 
 ## FASE 2 — Dados WINFUT Renko 30R
 Criar adaptador e validar contrato com exportações reais do Profit; documentar regra Renko, timestamps, volume e origem.

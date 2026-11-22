@@ -11,7 +11,7 @@ x_t = offset + a*cos(omega*t) + b*sin(omega*t) + erro.
 A=sqrt(a²+b²); fase=atan2(b,a), usando a convenção ajustada(t)=offset+A*cos(omega*t-fase).
 
 ## Energia e entropia
-p_k=power_k/sum(power). H=-sum(p_k*ln(p_k))/ln(M), para M bins selecionados. Estados degenerados retornam valid=false, sem NaN silencioso.
+p_k=power_k/sum(power). H=-sum(p_k*ln(p_k))/ln(M), para M bins selecionados. Estados degenerados retornam valid=false, sem NaN silencioso. A implementação permite restringir métricas a uma banda de frequência; bins fora da banda não participam do denominador.
 
 ## Convenções implementadas em Python 0.2.0
 - FFT real via numpy.fft.rfft.
@@ -19,7 +19,7 @@ p_k=power_k/sum(power). H=-sum(p_k*ln(p_k))/ln(M), para M bins selecionados. Est
 - Amplitude de pico corrigida pelo ganho coerente da janela.
 - Power é magnitude ao quadrado dos coeficientes DFT da série janelada; é uma medida relativa sob mesmo tamanho/janela, não uma PSD calibrada.
 - Regressão harmônica por mínimos quadrados com intercepto.
-- Entropia normalizada e concentração máxima da energia relativa.
+- Entropia normalizada e concentração máxima da energia relativa, calculadas na banda selecionada.
 
 ## Limitações
-Séries financeiras são não estacionárias. Estimativas dependem da janela, detrending e faixa de frequência. Pico espectral não prova ciclo persistente nem prevê reversão. É obrigatório validar fora da amostra.
+Séries financeiras são não estacionárias. Estimativas dependem da janela, detrending e faixa de frequência. Pico espectral não prova ciclo persistente nem prevê reversão. Entropia e concentração descrevem a distribuição de energia; não são, isoladamente, critérios de confiabilidade. É obrigatório validar fora da amostra.
