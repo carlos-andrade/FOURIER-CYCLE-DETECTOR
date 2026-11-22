@@ -20,10 +20,11 @@ Estado: IMPLEMENTADA; CI APROVADA em 2026-11-22 (run 45063506164).
 - Sem conectividade, scraping, feed, aquisição automática ou promoção de datasets.
 
 ## FASE 2 — Dados WINFUT em gráfico 60K Trades (Profit One)
-Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; CERTIFICAÇÃO SEMÂNTICA PENDENTE.
+Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; PARSER XLSX IMPLEMENTADO E CI APROVADA; CERTIFICAÇÃO SEMÂNTICA PENDENTE.
 - Configuração declarada pelo utilizador: Profit One, gráfico 60K Trades.
 - Amostra Excel recebida e inspecionada; relatório em docs/FASE2_DATASET_AUDIT.md.
 - 13.390 registos OHLC em 147 sessões, com contador contínuo por sessão.
+- Parser XLSX offline implementado; exige timezone explícito, mantém semântica temporal UNKNOWN e não infere trade_count/volume.
 - A amostra não contém trade_count nem volume explícito; portanto, não comprova 60.000 negócios por barra.
 - 27 timestamps repetidos com precisão apenas ao minuto; 6.908 registos têm pelo menos um OHLC não múltiplo de 5.
 - Requer reconciliação da origem dos preços, semântica temporal, volume e contagem de negócios antes da certificação do adaptador.
