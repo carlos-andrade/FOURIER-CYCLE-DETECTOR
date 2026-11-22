@@ -215,12 +215,20 @@ def fes(values: Iterable[float], window: int = 128, min_period: int = 8,
 
 def fed(cycle: FCDResult, harmonic: FHOResult,
         frequency_shift_threshold: float = 0.20,
-        amplitude_collapse_threshold: float = -0.35) -> FEDResult:
-    """Detect material changes versus the immediately preceding valid bar."""
+        amplitude_collapse_threshold: float = -0.35,
+        amplitude_reference_bars: int = 64) -> FEDResult:
+    """Detect adjacent frequency shifts and lagged harmonic-amplitude collapses.
+
+    The amplitude reference is deliberately longer than one bar because FHO
+    amplitude is estimated from a 128-bar rolling harmonic fit. Comparing
+    adjacent fitted amplitudes suppresses abrupt changes through smoothing.
+    """
     if not 0.0 < frequency_shift_threshold < 1.0:
         raise ValueError("frequency_shift_threshold must be between 0 and 1")
     if not -1.0 < amplitude_collapse_threshold < 0.0:
         raise ValueError("amplitude_collapse_threshold must be between -1 and 0")
+    if amplitude_reference_bars < 1:
+        raise ValueError("amplitude_reference_bars must be >= 1")
     n = cycle.valid.size
     shift = np.full(n, np.nan)
     amplitude_change = np.full(n, np.nan)
@@ -228,16 +236,18 @@ def fed(cycle: FCDResult, harmonic: FHOResult,
     valid = np.zeros(n, dtype=bool)
     for i in range(1, n):
         if not (cycle.valid[i] and cycle.valid[i - 1]
-                and harmonic.valid[i] and harmonic.valid[i - 1]):
+                and harmonic.valid[i]):
             continue
         previous = cycle.dominant_frequency[i - 1]
         current = cycle.dominant_frequency[i]
         shift[i] = abs(current - previous) / previous if previous else np.nan
-        old_amp = harmonic.amplitude[i - 1]
-        new_amp = harmonic.amplitude[i]
-        amplitude_change[i] = (
-            (new_amp - old_amp) / old_amp if old_amp > 1e-12 else np.nan
-        )
+        reference_index = i - amplitude_reference_bars
+        if reference_index >= 0 and harmonic.valid[reference_index]:
+            old_amp = harmonic.amplitude[reference_index]
+            new_amp = harmonic.amplitude[i]
+            amplitude_change[i] = (
+                (new_amp - old_amp) / old_amp if old_amp > 1e-12 else np.nan
+            )
         if np.isfinite(shift[i]) and shift[i] >= frequency_shift_threshold:
             event[i] = "FREQUENCY_SHIFT"
         elif (np.isfinite(amplitude_change[i])
