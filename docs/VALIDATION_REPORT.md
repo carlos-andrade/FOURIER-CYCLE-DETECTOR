@@ -47,7 +47,7 @@
 - It does not infer trade_count, volume, instrument tick size or 60K compliance.
 - Added optional `excel` dependency and CI coverage.
 - CI SUCCESS: run 45072681348, commit 602b8e07438d84f302cb0d625b4bb76aa6748c5e (2026-11-22); 36 tests passed.
-- Latest documentation commit CI SUCCESS: run 45073501971, commit 5360d193daf6c0c991e713277b63ba6b9e4b26c2.
+- Last documentation commit with a recorded CI SUCCESS: run 45073501971, commit 5360d193daf6c0c991e713277b63ba6b9e4b26c2. Subsequent documentation-only commits (including the current report update) have no associated workflow run/status; they do not change executable code.
 
 ## Temporal price-grid regime check
 
