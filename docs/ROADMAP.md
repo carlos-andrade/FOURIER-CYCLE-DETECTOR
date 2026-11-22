@@ -1,0 +1,34 @@
+# Roadmap
+
+## FASE 0 — Reconhecimento e baseline
+Estado: CONCLUÍDA. Repositório reconhecido; licença MIT e commit inicial preservados; escopo e princípios registrados.
+
+## FASE 1 — Núcleo matemático Python
+Estado: PRÓXIMA. Implementar DFT/FFT, janelamento, regressão harmônica, fase, amplitude, energia e entropia; criar testes sintéticos de referência.
+
+Critério de saída: testes matemáticos e casos degenerados aprovados.
+
+## FASE 2 — Dados WINFUT Renko 30R
+Criar adaptador e validar contrato com exportações reais do Profit; documentar regra Renko, timestamps, volume e origem.
+
+Critério: histórico real validado e reproduzível.
+
+## FASE 3 — Indicadores e FGSE
+Implementar FCD, FHO, FES, FED, FRC e agregador FGSE.
+
+Critério: integração e estados reproduzíveis.
+
+## FASE 4 — Validação estatística
+Causalidade, estabilidade, walk-forward, falsos positivos e análise econômica com custos.
+
+Critério: relatório fora da amostra e limitações documentadas.
+
+## FASE 5 — NTSL
+Portar componentes viáveis; comparar NTSL com referência Python e validar no Profit Pro.
+
+Critério: tolerâncias numéricas previamente definidas e testes operacionais aprovados.
+
+## FASE 6 — Integração controlada com BrickMaster
+Somente após certificação; inicialmente modo observacional/simulação, sem envio de ordens.
+
+Critério: interface validada e aprovação específica da integração.

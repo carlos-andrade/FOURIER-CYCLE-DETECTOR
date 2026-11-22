@@ -1,0 +1,23 @@
+project:
+  name: FOURIER-CYCLE-DETECTOR
+  engine: FOURIER-GYROSCOPE
+  status: research
+
+market:
+  instrument: WINFUT
+  chart_type: renko
+  renko_label: 30R
+  update_policy: closed_brick_only
+
+analysis:
+  windows: [128, 256]
+  window_function: hann
+  min_frequency_cycles_per_brick: 0.015625
+  max_frequency_cycles_per_brick: 0.25
+  reconstruction_harmonics: 3
+
+safety:
+  allow_order_execution: false
+  allow_brickmaster_integration: false
+  require_causal_processing: true
+  preserve_emitted_signals: true
