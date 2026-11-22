@@ -20,11 +20,14 @@ Estado: IMPLEMENTADA; CI APROVADA em 2026-11-22 (run 45063506164).
 - Sem conectividade, scraping, feed, aquisição automática ou promoção de datasets.
 
 ## FASE 2 — Dados WINFUT em gráfico 60K Trades (Profit One)
-Estado: BLOQUEADA ATÉ À EXPORTAÇÃO REAL E VALIDAÇÃO SEMÂNTICA.
+Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; CERTIFICAÇÃO SEMÂNTICA PENDENTE.
 - Configuração declarada pelo utilizador: Profit One, gráfico 60K Trades.
-- A série-alvo é construída por contagem de negócios (trades), não por tijolos Renko.
-- Validar na exportação a regra exata de formação/fecho das barras, contagem observada por barra, timestamps, OHLC, volume, sessão, ordenação e tratamento da barra final/incompleta.
-- Não inferir que volume financeiro, quantidade de contratos e número de negócios são a mesma grandeza.
+- Amostra Excel recebida e inspecionada; relatório em docs/FASE2_DATASET_AUDIT.md.
+- 13.390 registos OHLC em 147 sessões, com contador contínuo por sessão.
+- A amostra não contém trade_count nem volume explícito; portanto, não comprova 60.000 negócios por barra.
+- 27 timestamps repetidos com precisão apenas ao minuto; 6.908 registos têm pelo menos um OHLC não múltiplo de 5.
+- Requer reconciliação da origem dos preços, semântica temporal, volume e contagem de negócios antes da certificação do adaptador.
+- Não confundir volume financeiro, quantidade de contratos e número de negócios.
 - COTAHIST é dado diário consolidado e não substitui a série intradiária.
 
 ## FASE 3 — FCD, FHO, FES, FED, FRC e FGSE
