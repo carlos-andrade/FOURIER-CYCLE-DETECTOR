@@ -17,7 +17,6 @@ class FeedGranularity(str, Enum):
     TOB = 'TOB'
     CONFLATED = 'CONFLATED'
     DAILY_BAR = 'DAILY_BAR'
-    RENKO_BAR = 'RENKO_BAR'
 
 @dataclass(frozen=True)
 class InstrumentIdentity:
