@@ -31,8 +31,12 @@
 - OHLC completeness and internal high/low/open/close consistency passed the initial structural checks.
 - Candle counter restarts at 1 and is continuous within all 147 sessions.
 - 27 timestamps repeat; exported precision is minute-level.
-- 6,908 rows have at least one OHLC value that is not a multiple of 5.
+- 10,511 rows have at least one OHLC value that is not a multiple of 5 (recounted with Decimal arithmetic; previous 6,908 figure was incorrect).
 - No explicit trade_count or volume column was identified. Two indicator columns, BMFB_001 and BMFB_002, are entirely empty.
+- User confirmed the `Data` column timezone as `America/Sao_Paulo`; the six-column parser logic was applied to all 13,390 rows with zero parsing/OHLC/counter errors.
+- After chronological sorting by timestamp and source counter, all 147 session counters are continuous; 27 duplicate-minute timestamp groups are preserved.
+- Timestamp semantics remain UNKNOWN; timezone confirmation does not establish whether `Data` is bar-open or bar-close time.
+- The 10,511 non-multiple-of-5 finding is a corrected Decimal-based recount; it is not a conclusion that those values are invalid.
 - Detailed findings: docs/FASE2_DATASET_AUDIT.md.
 
 ## Offline XLSX bar model and adapter
@@ -43,6 +47,7 @@
 - It does not infer trade_count, volume, instrument tick size or 60K compliance.
 - Added optional `excel` dependency and CI coverage.
 - CI SUCCESS: run 45072681348, commit 602b8e07438d84f302cb0d625b4bb76aa6748c5e (2026-11-22); 36 tests passed.
+- Latest documentation commit CI SUCCESS: run 45073501971, commit 5360d193daf6c0c991e713277b63ba6b9e4b26c2.
 
 ## Interpretation
 
