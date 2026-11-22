@@ -39,6 +39,7 @@ Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; PARSER XLSX IMPLE
 ## FASE 2.1 — Reconciliação semântica e evidência de origem
 Estado: ABERTA; BLOQUEADA POR EVIDÊNCIA EXTERNA À AMOSTRA ATUAL.
 - Plano de trabalho e critérios de aceitação: docs/FASE2_1_RECONCILIATION_PLAN.md.
+- Ficha estruturada para recolha de metadados e evidências: docs/FASE2_1_EVIDENCE_INTAKE.md.
 - Workstreams: identidade/vencimento, construção 60K, trade_count/volume, semântica temporal, quebra da grelha de preços, sessões e direitos de uso.
 - Próxima dependência: nova exportação do Profit One com todos os campos disponíveis e registo dos parâmetros do gráfico/provedor.
 - Não alterar OHLC nem inferir trade_count, volume, tick oficial ou semântica temporal.
