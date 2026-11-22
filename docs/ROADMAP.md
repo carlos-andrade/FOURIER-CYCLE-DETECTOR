@@ -1,24 +1,42 @@
 # Roadmap
 
 ## FASE 0 — Reconhecimento e baseline
-CONCLUÍDA: repositório reconhecido, licença MIT preservada, governança e arquitetura inicial documentadas.
+Estado: CONCLUÍDA. Repositório reconhecido; licença MIT e commit inicial preservados; escopo e princípios registrados.
 
 ## FASE 1 — Núcleo matemático Python
-EM IMPLEMENTAÇÃO: FFT, regressão harmônica, amplitude/fase e métricas espectrais implementadas em baseline 0.2.0; testes sintéticos iniciais adicionados. Pendentes testes avançados, revisão e execução reproduzível da suíte.
+Estado: EM IMPLEMENTAÇÃO. Primitivas FFT, regressão harmônica, fase, amplitude, energia e entropia implementadas. Bateria inicial aprovada; bateria ampliada de robustez adicionada e aguardando CI.
 
-Critério de saída: testes matemáticos de referência e casos degenerados aprovados.
+### FASE 1.1 — Robustez sintética
+- Multi-frequência.
+- Ruído.
+- Modulação de amplitude.
+- Frequência variável.
+- Mudança de regime.
+- Sensibilidade à janela.
+
+Critério de saída: todos os testes passarem no CI e limitações documentadas.
 
 ## FASE 2 — Dados WINFUT Renko 30R
-Adaptador e validação do contrato com exportações reais do Profit. Documentar regra Renko, timestamps, volume e origem.
+Criar adaptador e validar contrato com exportações reais do Profit; documentar regra Renko, timestamps, volume e origem.
+
+Critério: histórico real validado e reproduzível.
 
 ## FASE 3 — Indicadores e FGSE
 Implementar FCD, FHO, FES, FED, FRC e agregador FGSE.
 
+Critério: integração e estados reproduzíveis.
+
 ## FASE 4 — Validação estatística
 Causalidade, estabilidade, walk-forward, falsos positivos e análise econômica com custos.
 
+Critério: relatório fora da amostra e limitações documentadas.
+
 ## FASE 5 — NTSL
-Portar componentes viáveis e comparar NTSL com referência Python; validar no Profit Pro.
+Portar componentes viáveis; comparar NTSL com referência Python e validar no Profit Pro.
+
+Critério: tolerâncias numéricas previamente definidas e testes operacionais aprovados.
 
 ## FASE 6 — Integração controlada com BrickMaster
-Somente após certificação; inicialmente observacional/simulação, sem envio de ordens.
+Somente após certificação; inicialmente modo observacional/simulação, sem envio de ordens.
+
+Critério: interface validada e aprovação específica da integração.
