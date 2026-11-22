@@ -14,7 +14,7 @@ Estado: CONCLUÍDA COM CI APROVADO.
 Estado: IMPLEMENTADA; CI pendente.
 - Modelos tipados para identidade de instrumento e trade event.
 - Separação explícita de agressor OBSERVED, PROXY e UNKNOWN.
-- Preservação temporal: event_at, information_available_at, received_at.
+- Preservação temporal: event_at, information_available_at e received_at.
 - Auditoria de sequência por origem/stream/canal/escopo.
 - Adaptador CSV local e read-only.
 - Sem conectividade, scraping, feed, aquisição automática ou promoção de datasets.
