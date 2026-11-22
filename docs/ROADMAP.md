@@ -11,7 +11,7 @@ Inclui FFT, regressão harmônica, amplitude, fase, potência e métricas espect
 Estado: CONCLUÍDA COM CI APROVADO.
 
 ## FASE 1.3 — Fronteira de dados B3 e ingestão offline
-Estado: IMPLEMENTADA; CI pendente.
+Estado: IMPLEMENTADA; CI APROVADA em 2026-11-22 (run 45063506164).
 - Modelos tipados para identidade de instrumento e trade event.
 - Separação explícita de agressor OBSERVED, PROXY e UNKNOWN.
 - Preservação temporal: event_at, information_available_at e received_at.
