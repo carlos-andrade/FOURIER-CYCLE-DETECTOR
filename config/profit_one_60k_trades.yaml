@@ -1,0 +1,15 @@
+market:
+  instrument: WINFUT
+  source_platform: Profit One
+  chart_type: trades
+  chart_label: 60K Trades
+  target_trade_count_per_bar: 60000
+
+# The configured target is not proof that every exported bar contains
+# exactly 60000 trades. Validate observed counts, partial bars, timestamps,
+# volume semantics and session boundaries against a real authorized export.
+validation:
+  status: pending
+  requires_real_export: true
+  observed_trade_count_field: trade_count
+  allow_partial_final_bar: unknown
