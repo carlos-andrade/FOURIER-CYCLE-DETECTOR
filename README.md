@@ -1,56 +1,23 @@
-# FOURIER CYCLE DETECTOR
+# FOURIER CYCLE DETECTOR — FOURIER GYROSCOPE
 
-**Motor central:** FOURIER GYROSCOPE  
-**Mercado inicial:** WINFUT (B3)  
-**Representação operacional:** Renko 30R  
-**Pesquisa e referência matemática:** Python  
-**Implementação operacional planejada:** NTSL / Profit Pro
+Engine research for causal Fourier/harmonic market-state analysis, initially focused on WINFUT and Profit Pro Renko 30R.
 
-## Objetivo
+## Governing principles
+- Closed bricks only in operational evaluation; no look-ahead.
+- FFT frequencies over Renko are cycles per brick, not cycles per second.
+- Synthetic tests are not empirical market validation.
+- No forced cycle declaration: insufficient/no-cycle states must remain possible.
+- No automatic order execution.
+- Python is the numerical reference implementation; later NTSL port requires equivalence tests.
 
-Desenvolver um sistema causal e verificável de análise harmônica para estimar ciclos, amplitude, fase, energia espectral, esgotamento e mudanças de regime. O sistema deve poder declarar que não existe ciclo confiável; não deve forçar uma interpretação para todo movimento.
+## Data sources
+For Brazilian exchange data contracts, provenance and access boundaries, the primary project reference is the private repository [carlos-andrade/B3](https://github.com/carlos-andrade/B3). See `docs/B3_DATA_REFERENCE.md`.
+The implementation in `src/fourier_gyroscope/market_data` is offline-only and accepts local files. It does not connect to UMDF or distributors and does not acquire data.
 
-## Estado do projeto
+## Current components
+- Mathematical core: FFT, harmonic regression and spectral diagnostics.
+- Market data boundary: typed instruments/trade events, explicit aggressor provenance, sequence continuity audit and CSV local adapter.
+- Automated tests: mathematical, causality and market-data contracts.
 
-Baseline Python 0.2.0: primitivas matemáticas iniciais implementadas (FFT, regressão harmônica, amplitude/fase, energia e entropia) com testes sintéticos. A execução integral da suíte no GitHub Actions é o próximo mecanismo de validação automatizada. Não há certificação com dados reais nem indicador operacional.
-
-## Instalação e testes
-
-```bash
-python -m pip install -e ".[dev]"
-python -m pytest -q
-```
-
-## Princípios
-
-- Python é a referência matemática para a futura implementação NTSL.
-- Nenhum cálculo pode utilizar dados futuros.
-- As estimativas são atualizadas com tijolos fechados; sinais históricos emitidos são imutáveis.
-- Renko é indexado por eventos: um período de 20 tijolos não equivale a 20 minutos.
-- Não assumir tamanho, reversão ou regra de construção do Renko sem evidência exportada do Profit.
-- Não enviar ordens nesta fase.
-- Não integrar ao BrickMaster antes da validação e aprovação específicas.
-- Não usar indicadores prontos como substitutos dos componentes matemáticos próprios.
-
-## Módulos planejados
-
-1. FCD — Fourier Cycle Detector.
-2. FHO — Fourier Harmonic Oscillator.
-3. FES — Fourier Energy Spectrum.
-4. FED — Fourier Exhaustion Detector.
-5. FRC — Fourier Regime Classifier.
-6. FGSE — Fourier Gyroscope State Engine, agregador de estado.
-
-## Documentação
-
-- [Arquitetura](docs/ARCHITECTURE.md)
-- [Modelo matemático](docs/MATHEMATICAL_MODEL.md)
-- [Especificação técnica](docs/TECHNICAL_SPECIFICATION.md)
-- [Contrato de dados](docs/DATA_CONTRACT.md)
-- [Estratégia de testes](docs/TEST_STRATEGY.md)
-- [Roadmap](docs/ROADMAP.md)
-- [Governança](GOVERNANCA/GOVERNANCE.md)
-
-## Aviso
-
-Este projeto é pesquisa e desenvolvimento. Resultados históricos ou sintéticos não garantem desempenho futuro. Nenhum componente está autorizado a gerar ordens reais.
+## Project status
+See `docs/ROADMAP.md` and `docs/VALIDATION_REPORT.md`.
