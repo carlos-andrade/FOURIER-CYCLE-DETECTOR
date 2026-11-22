@@ -120,3 +120,28 @@ def test_invalid_fes_band_is_rejected_before_calculation():
     with pytest.raises(ValueError, match="outside configured range"):
         fes(signal(length=64), window=64, min_period=8, max_period=32,
             bands={"invalid": (4, 16)})
+
+
+def test_off_bin_frequency_error_is_bounded_by_half_fft_bin():
+    # A period of 18.5 bars does not lie on a 128-point FFT frequency bin.
+    window = 128
+    true_period = 18.5
+    t = np.arange(384, dtype=float)
+    x = 20.0 + 0.01 * t + 2.0 * np.sin(2.0 * np.pi * t / true_period + 0.73)
+    result = fcd(x, window=window, min_period=8, max_period=64)
+    assert result.valid[-1]
+    true_frequency = 1.0 / true_period
+    frequency_error = abs(result.dominant_frequency[-1] - true_frequency)
+    # The selected FFT peak must be no farther than half one native bin.
+    assert frequency_error <= (0.5 / window) + 1e-12
+    assert np.isfinite(result.peak_power_share[-1])
+    assert 0.0 <= result.peak_power_share[-1] <= 1.0
+
+
+def test_exact_bin_period_is_stable_across_supported_window_lengths():
+    period = 16
+    for window in (64, 128, 256, 512):
+        x = signal(length=window + 64, period=period, amplitude=2.0)
+        result = fcd(x, window=window, min_period=8, max_period=64)
+        assert result.valid[-1]
+        assert abs(result.dominant_period_bars[-1] - period) < 1e-10

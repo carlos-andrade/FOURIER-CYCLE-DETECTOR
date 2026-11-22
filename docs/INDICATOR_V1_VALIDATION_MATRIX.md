@@ -8,7 +8,7 @@
 | Dimension | Synthetic input | Expected observation | Required measurement |
 |---|---|---|---|
 | Exact-bin frequency | Single sinusoid with period aligned to an FFT bin | FCD returns the known bin | Absolute period and frequency error |
-| Off-bin frequency | Sinusoid between FFT bins | Peak remains near true frequency; leakage is visible | Bias and peak-power share |
+| Off-bin frequency | Sinusoid between FFT bins | Peak remains within half a native FFT frequency bin for the deterministic single-tone fixture; leakage is visible | Absolute frequency error, relative period error and peak-power share |
 | Two-tone mixture | Two sinusoids with controlled amplitude ratio | Dominant peak follows stronger component when sufficiently separated | Dominant-component accuracy and resolution limit |
 | Frequency drift | Linear chirp / gradual period change | FCD follows with lag and bounded smearing | Tracking lag, period error, transition duration |
 | Abrupt frequency step | Two constant-frequency segments | FED can mark a transition; FCD eventually settles to new period | Detection delay, false transition count, settling time |
@@ -73,6 +73,6 @@ The first NTSL port must be one indicator at a time. No visual or trading interp
 
 ## 7. Current status
 
-The robustness suite covers two-tone dominance, abrupt frequency change, amplitude collapse, white noise, zero-energy abstention and invalid FES bands. The FED amplitude-collapse comparison uses a 64-bar lag because the 128-bar FHO rolling fit smooths abrupt amplitude steps; the resulting detection delay is explicitly tested. The GitHub Actions workflow executes the complete `tests/` tree.
+The deterministic suite additionally checks an off-bin 18.5-bar sinusoid against a half-native-bin frequency-error bound and exact-bin period recovery at window lengths 64, 128, 256 and 512 bars. These are controlled single-tone fixtures, not general accuracy guarantees. The broader suite covers two-tone dominance, abrupt frequency change, amplitude collapse, white noise, zero-energy abstention and invalid FES bands. The FED amplitude-collapse comparison uses a 64-bar lag because the 128-bar FHO rolling fit smooths abrupt amplitude steps; the resulting detection delay is explicitly tested. The GitHub Actions workflow executes the complete `tests/` tree.
 
 No V1 certification is claimed until the complete CI is green and the broader numerical matrix has been measured.
