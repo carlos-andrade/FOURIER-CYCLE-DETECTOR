@@ -61,11 +61,11 @@ Estado: V1 DE REFERÊNCIA IMPLEMENTADA; VALIDAÇÃO CI E ROBUSTEZ AMPLIADA PENDE
 - Frequências em ciclos por candle; períodos em candles. Nenhuma hipótese de tempo de calendário uniforme.
 - Próxima etapa: CI completa, expansão da matriz de sinais sintéticos e quantificação de erro, leakage, deriva e falsos positivos.
 
-## FASE 4 — Validação estatística
-Walk-forward, análise fora da amostra, estabilidade, falsos positivos, custos e slippage.
+## FASE 4 — Validação estatística dos indicadores
+Estabilidade espectral, resolução, leakage, erro de período/amplitude/fase, falsos positivos, abstenção, ruído, deriva de frequência, não estacionariedade e causalidade. Não é backtest de rentabilidade.
 
 ## FASE 5 — NTSL
 Portar somente componentes com equivalência numérica testável em relação ao Python.
 
-## FASE 6 — Integração controlada BrickMaster
-Apenas após certificação; inicialmente observacional/simulação, sem envio de ordens.
+## FASE 6 — Integração analítica controlada
+Integração visual/observacional dos indicadores após certificação e autorização explícita. Não inclui execução de ordens.
