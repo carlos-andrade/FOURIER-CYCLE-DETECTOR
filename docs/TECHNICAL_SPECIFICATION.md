@@ -2,15 +2,15 @@
 
 ## Escopo V1
 
-WINFUT, dados Renko 30R exportados do Profit, pesquisa em Python e atualização em tijolos fechados. Sem execução de ordens.
+WINFUT, gráfico 60K Trades do Profit One, pesquisa em Python e atualização somente após o fechamento da barra. Sem execução de ordens.
 
 ## Parâmetros experimentais iniciais
 
-- Janelas candidatas: 128 e 256 tijolos.
+- Janelas candidatas: 128 e 256 barras.
 - Janela espectral: Hann.
-- Frequência candidata: 1/64 a 1/4 ciclos por tijolo, sujeita a análise de resolução e sensibilidade.
+- Frequência candidata: 1/64 a 1/4 ciclos por barra, sujeita a análise de resolução e sensibilidade.
 - Harmônicos de reconstrução: até 3 como hipótese inicial.
-- Atualização: fechamento de cada tijolo.
+- Atualização: fechamento de cada barra.
 - Histórico mínimo: definido pelo maior requisito entre os módulos; não inferir validade só por atingir 256 observações.
 
 Estes valores são parâmetros de laboratório, não parâmetros otimizados nem certificados.
