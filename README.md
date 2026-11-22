@@ -1,10 +1,11 @@
 # FOURIER CYCLE DETECTOR — FOURIER GYROSCOPE
 
-Engine research for causal Fourier/harmonic market-state analysis, initially focused on WINFUT and Profit Pro Renko 30R.
+Engine research for causal Fourier/harmonic market-state analysis, initially focused on WINFUT and the Profit One 60K Trades chart configuration.
 
 ## Governing principles
-- Closed bricks only in operational evaluation; no look-ahead.
-- FFT frequencies over Renko are cycles per brick, not cycles per second.
+- Closed bars only in operational evaluation; no look-ahead.
+- FFT frequencies over the 60K Trades bar sequence are cycles per bar, not cycles per second.
+- Bar durations can vary with the underlying trade flow; preserve timestamps for separate time-domain analysis.
 - Synthetic tests are not empirical market validation.
 - No forced cycle declaration: insufficient/no-cycle states must remain possible.
 - No automatic order execution.
@@ -20,4 +21,4 @@ The implementation in `src/fourier_gyroscope/market_data` is offline-only and ac
 - Automated tests: mathematical, causality and market-data contracts.
 
 ## Project status
-See `docs/ROADMAP.md` and `docs/VALIDATION_REPORT.md`.
+See `docs/ROADMAP.md`, `docs/FASE2_DATASET_AUDIT.md` and `docs/VALIDATION_REPORT.md`.
