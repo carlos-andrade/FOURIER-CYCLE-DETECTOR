@@ -32,7 +32,7 @@ Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; PARSER XLSX IMPLE
 - Requer reconciliação da origem dos preços, semântica temporal, volume e contagem de negócios antes da certificação do adaptador.
 - O contrato B3 V2 exige identidade oficial do instrumento com validade temporal e atributos versionados (vencimento, multiplicador, tick size, moeda, segmento e estado); o catálogo B3 consultado não contém atualmente um registo WINFUT datado que permita fechar essa reconciliação.
 - A anomalia de grelha de 5 pontos concentra-se nas 121 sessões de 2026-04-22 a 2026-10-13; nas 26 sessões de 2026-10-14 a 2026-11-19 não ocorre. Causa não identificada; não corrigir os preços por arredondamento.
-- Implementado diagnóstico reproduzível de grelha candidata por sessão (`audit_candidate_price_grid`), sem presumir tick oficial e sem modificar OHLC; testes sintéticos adicionados, CI pendente.
+- Implementado diagnóstico reproduzível de grelha candidata por sessão (`audit_candidate_price_grid`), sem presumir tick oficial e sem modificar OHLC; testes sintéticos adicionados; CI aprovada (run 45078417762, 42 testes).
 - Não confundir volume financeiro, quantidade de contratos e número de negócios.
 - COTAHIST é dado diário consolidado e não substitui a série intradiária.
 
