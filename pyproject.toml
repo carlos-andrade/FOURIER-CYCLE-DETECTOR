@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fourier-gyroscope"
 version = "0.3.0"
-description = "Causal harmonic market-state research engine for WINFUT Renko data"
+description = "Causal harmonic market-state research engine for WINFUT 60K Trades bars"
 requires-python = ">=3.12"
 license = { file = "LICENSE" }
 dependencies = ["numpy>=2.0"]
