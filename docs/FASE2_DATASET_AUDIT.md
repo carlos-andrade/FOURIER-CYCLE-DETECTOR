@@ -28,6 +28,18 @@
 - Os intervalos intrassessão são variáveis: mediana 4 minutos, média aproximada 6,06 minutos.
 - 6.908 registos apresentam pelo menos um campo OHLC que não é múltiplo de 5.
 
+## Adaptador offline implementado
+
+- `MarketBar` representa barras OHLC com índice global, contador de origem, timestamp, semântica temporal explícita/UNKNOWN e campos opcionais de trade_count e volume.
+- `iter_profit_one_xlsx` lê somente Data, Abertura, Máxima, Mínima, Fechamento e Contador de Candles.
+- Colunas de indicadores são deliberadamente ignoradas.
+- A ordenação é cronológica; o contador original é usado para desempatar timestamps iguais.
+- O timezone IANA é obrigatório na chamada do adaptador. Não há inferência automática de timezone.
+- A semântica do timestamp começa como UNKNOWN e não é presumida como abertura ou fecho da barra.
+- trade_count, volume e volume financeiro permanecem ausentes quando não estão na exportação.
+- O SHA-256 do ficheiro de origem é preservado em cada MarketBar.
+- Dependência XLSX isolada no extra opcional `excel`.
+
 ## Interpretação e bloqueios
 
 Esta auditoria confirma integridade estrutural básica do conjunto OHLC e continuidade do contador por sessão. Não certifica a construção 60K Trades.
@@ -36,11 +48,12 @@ Não é possível verificar a quantidade de negócios por barra porque a folha n
 
 Os timestamps repetidos podem resultar de precisão de exportação limitada a minutos; a amostra não permite reconstruir a ordem intraminuto. A frequência de preços não múltiplos de 5 requer reconciliação com a origem e a transformação dos preços antes de aceitar os OHLC como cotações nativas do WINFUT.
 
-As colunas de indicadores não devem ser tratadas como fonte primária de mercado. Os campos completamente vazios devem permanecer ausentes, não ser preenchidos artificialmente.
+O adaptador é um parser de ingestão offline e não uma certificação da fonte. A configuração 60K, o instrumento/vencimento, o timezone, a semântica temporal e a completude da barra continuam a exigir confirmação.
 
 ## Estado
 
 - Auditoria estrutural inicial: CONCLUÍDA COM RESSALVAS.
+- Parser XLSX offline: IMPLEMENTADO; CI APROVADA.
 - Certificação da configuração 60K Trades: PENDENTE.
 - Certificação da semântica dos preços OHLC: PENDENTE.
 - Certificação de volume/trade_count: PENDENTE.
@@ -49,9 +62,8 @@ As colunas de indicadores não devem ser tratadas como fonte primária de mercad
 ## Próximas verificações necessárias
 
 1. Confirmar no Profit One o instrumento, vencimento e configuração exata usada para gerar a exportação.
-2. Exportar amostra com volume e, se disponível, número de negócios por barra.
-3. Confirmar se os timestamps representam abertura, fecho ou outro marco temporal da barra.
+2. Confirmar o timezone da coluna Data e se representa abertura, fecho ou outro marco temporal da barra.
+3. Exportar amostra com volume e, se disponível, número de negócios por barra.
 4. Explicar a ocorrência de OHLC não múltiplo de 5 e reconciliar com os dados originais.
 5. Definir o tratamento das barras iniciais/finais de sessão e das barras incompletas.
-6. Só depois converter a amostra autorizada em fixtures de teste e certificar o adaptador.
-
+6. Só depois converter amostra autorizada em fixtures de teste de integração e certificar o adaptador.
