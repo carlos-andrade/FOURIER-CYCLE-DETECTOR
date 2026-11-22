@@ -68,12 +68,12 @@ Entropy near zero indicates concentration in few bins; entropy near one indicate
 
 ## 6. FED — Fourier Event Detector
 
-Compares each valid observation with the immediately preceding valid observation:
-- relative change in dominant frequency;
-- relative change in fitted harmonic amplitude;
+Uses two comparison horizons because the FHO amplitude is itself estimated by a 128-bar rolling harmonic fit:
+- relative change in dominant frequency versus the immediately preceding valid bar;
+- relative change in fitted harmonic amplitude versus its value 64 bars earlier (configurable through `amplitude_reference_bars`);
 - event label: `FREQUENCY_SHIFT`, `AMPLITUDE_COLLAPSE` or `NONE`.
 
-Default thresholds: 20% relative frequency shift and -35% relative amplitude change. These are transparent engineering defaults, not empirically calibrated thresholds. Frequency shift has precedence if both conditions occur simultaneously.
+Default thresholds: 20% relative frequency shift and -35% relative amplitude change, with a 64-bar amplitude reference. The longer amplitude horizon avoids suppressing a real collapse merely because the rolling FHO estimator smooths the step across many bars. It introduces detection lag and must be measured; it is not an instantaneous event detector. These are engineering defaults, not empirically calibrated thresholds. Frequency shift has precedence if both conditions occur simultaneously.
 
 ## 7. FRC — Fourier Regime Classifier
 
@@ -101,7 +101,7 @@ Only completed bars should be supplied. The library cannot independently know wh
 - FFT resolution is limited by the window length.
 - Hann taper and linear detrending reduce, but do not eliminate, spectral leakage.
 - Rapidly changing frequency within a window can smear spectral energy.
-- FED compares adjacent rolling estimates and can react to estimation noise.
+- FED compares adjacent rolling frequency estimates and a 64-bar-lagged amplitude estimate; the latter reduces smoothing-induced missed collapses but introduces detection lag.
 - FRC thresholds and confidence are provisional heuristics.
 - Missing bars are rejected; no gap repair is attempted.
 - No time-domain spectral analysis is performed.

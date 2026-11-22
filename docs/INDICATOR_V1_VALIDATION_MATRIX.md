@@ -13,7 +13,7 @@
 | Frequency drift | Linear chirp / gradual period change | FCD follows with lag and bounded smearing | Tracking lag, period error, transition duration |
 | Abrupt frequency step | Two constant-frequency segments | FED can mark a transition; FCD eventually settles to new period | Detection delay, false transition count, settling time |
 | Amplitude modulation | Slowly varying sinusoid amplitude | FHO tracks envelope with smoothing/lag | Relative amplitude error and lag |
-| Amplitude collapse | Abrupt amplitude reduction | FED can mark collapse if threshold crossed | Detection delay and false positives |
+| Amplitude collapse | Abrupt amplitude reduction | FED compares the smoothed FHO amplitude with a configurable lagged reference (64 bars by default) | Detection delay in completed bars and false positives |
 | White noise | Fixed-seed Gaussian noise | No deterministic cycle is guaranteed | Entropy distribution, peak concentration, false persistent-cycle rate |
 | Zero-energy input | Constant series after detrending | Indicator abstains | Invalid-state correctness |
 | Trend-only input | Linear and nonlinear drift without cycle | No strong cycle should be asserted systematically | False-cycle rate |
@@ -42,7 +42,7 @@ No universal threshold is asserted in advance. Before a threshold is adopted:
 5. report false positives and abstentions, not only successful detections;
 6. freeze thresholds on a calibration set and report results on a separate synthetic holdout set.
 
-The existing V1 thresholds (20% frequency shift, -35% amplitude collapse, 0.35 concentration and 0.85 entropy) are provisional engineering defaults. They are not certified.
+The existing V1 thresholds (20% frequency shift, -35% amplitude collapse, 64-bar amplitude reference, 0.35 concentration and 0.85 entropy) are provisional engineering defaults. They are not certified.
 
 ## 4. Numerical definitions to standardize
 
@@ -73,6 +73,6 @@ The first NTSL port must be one indicator at a time. No visual or trading interp
 
 ## 7. Current status
 
-The first robustness tests have been added for two-tone dominance, abrupt frequency change, amplitude collapse, white noise, zero-energy abstention and invalid FES bands. The GitHub Actions workflow was widened to execute the complete `tests/` tree so that the top-level indicator test module is included.
+The robustness suite covers two-tone dominance, abrupt frequency change, amplitude collapse, white noise, zero-energy abstention and invalid FES bands. The FED amplitude-collapse comparison uses a 64-bar lag because the 128-bar FHO rolling fit smooths abrupt amplitude steps; the resulting detection delay is explicitly tested. The GitHub Actions workflow executes the complete `tests/` tree.
 
-CI results remain pending until a workflow run is observed and inspected. No V1 certification is claimed.
+No V1 certification is claimed until the complete CI is green and the broader numerical matrix has been measured.
