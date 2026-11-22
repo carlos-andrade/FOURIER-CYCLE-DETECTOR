@@ -76,8 +76,8 @@ def test_profit_one_xlsx_adapter_preserves_decimal_prices_and_minute_duplicates(
     sheet = workbook.active
     sheet.append(["Data", "Abertura", "Máxima", "Mínima", "Fechamento", "Contador de Candles"])
     # Deliberately reverse the source counter within the same minute.
-    sheet.append([datetime(2026, 4, 22, 9, 4), 211679.50, 211700.25, 211650.75, 211472.17, 2])
-    sheet.append([datetime(2026, 4, 22, 9, 4), 212232.37, 212300.11, 212200.93, 211955.93, 1])
+    sheet.append([datetime(2026, 4, 22, 9, 4), 211679.50, 211700.25, 211400.75, 211472.17, 2])
+    sheet.append([datetime(2026, 4, 22, 9, 4), 212232.37, 212300.11, 211900.93, 211955.93, 1])
     workbook.save(path)
 
     bars = list(iter_profit_one_xlsx(
@@ -92,7 +92,7 @@ def test_profit_one_xlsx_adapter_preserves_decimal_prices_and_minute_duplicates(
     assert [bar.source_counter for bar in bars] == [1, 2]
     assert bars[0].open == Decimal("212232.37")
     assert bars[0].high == Decimal("212300.11")
-    assert bars[0].low == Decimal("212200.93")
+    assert bars[0].low == Decimal("211900.93")
     assert bars[0].close == Decimal("211955.93")
     assert bars[0].bar_timestamp.utcoffset().total_seconds() == -3 * 3600
     assert bars[0].timestamp_precision == "MINUTE"
