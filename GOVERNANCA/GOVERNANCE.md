@@ -2,7 +2,7 @@
 
 ## Escopo
 
-Este repositório é a fonte oficial do projeto FOURIER CYCLE DETECTOR e do motor FOURIER GYROSCOPE. O ativo inicial é WINFUT, com Renko 30R como representação operacional pretendida.
+Este repositório é a fonte oficial do projeto FOURIER CYCLE DETECTOR e do motor FOURIER GYROSCOPE. O ativo inicial é WINFUT, com gráfico de 60K Trades no Profit One como representação operacional de referência.
 
 ## Regras obrigatórias
 
@@ -15,7 +15,9 @@ Este repositório é a fonte oficial do projeto FOURIER CYCLE DETECTOR e do moto
 7. Não usar dados futuros, repaint retrospectivo ou seleção de parâmetros no conjunto final de teste.
 8. Não enviar ordens nem integrar ao BrickMaster sem aprovação e certificação próprias.
 9. Dados de mercado devem ter origem, contrato, timezone, regra de construção e limitações documentadas.
-10. Não inventar dados ausentes nem inferir parâmetros do Renko sem evidência.
+10. Não inventar dados ausentes nem inferir parâmetros do gráfico 60K Trades sem evidência.
+11. Não confundir contagem de negócios (trade_count), quantidade de contratos/volume e volume financeiro.
+12. Não alterar, arredondar ou reescalar preços de origem para forçar conformidade com uma grelha candidata.
 
 ## Estados de maturidade
 
