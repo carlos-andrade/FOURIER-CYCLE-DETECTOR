@@ -41,7 +41,9 @@ Estado: ABERTA; BLOQUEADA POR EVIDÊNCIA EXTERNA À AMOSTRA ATUAL.
 - Plano de trabalho e critérios de aceitação: docs/FASE2_1_RECONCILIATION_PLAN.md.
 - Ficha estruturada para recolha de metadados e evidências: docs/FASE2_1_EVIDENCE_INTAKE.md.
 - Workstreams: identidade/vencimento, construção 60K, trade_count/volume, semântica temporal, quebra da grelha de preços, sessões e direitos de uso.
-- Próxima dependência: nova exportação do Profit One com todos os campos disponíveis e registo dos parâmetros do gráfico/provedor.
+- Reexportação adicional recebida em 2026-11-22 e auditada em docs/FASE2_REEXPORT_AUDIT_2026-11-22.md; mantém 13.390 registos/147 sessões, mas não inclui trade_count, quantidade de contratos nem volume financeiro explícitos.
+- A reexportação está em ordem cronológica inversa; o contador de candles é sequencial por sessão, mas não representa número de negócios.
+- Próxima dependência: captura da configuração do gráfico no Profit One, identificação do instrumento/vencimento e provedor, semântica temporal e exportação/documentação de campos de atividade/volume.
 - Não alterar OHLC nem inferir trade_count, volume, tick oficial ou semântica temporal.
 - Não certificar a FASE 2 até fechar os gates definidos no plano.
 
