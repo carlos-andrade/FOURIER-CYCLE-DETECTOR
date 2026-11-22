@@ -56,7 +56,9 @@ Estado: V1 DE REFERÊNCIA IMPLEMENTADA; VALIDAÇÃO CI E ROBUSTEZ AMPLIADA PENDE
 - FED: deteção de mudança relativa de frequência e colapso de amplitude.
 - FRC: estados descritivos com warm-up, transição, ruído, ciclo persistente e ciclo não identificável.
 - Especificação e limitações: `docs/FOURIER_INDICATORS_V1.md`.
-- Testes iniciais determinísticos e prefix-invariance: `tests/test_indicators_v1.py`.
+- Testes determinísticos ampliados: dois tons, degrau de frequência, colapso de amplitude, ruído branco, abstenção em energia nula, bandas inválidas e prefix-invariance: `tests/test_indicators_v1.py`.
+- Matriz de validação e critérios para futura paridade NTSL: `docs/INDICATOR_V1_VALIDATION_MATRIX.md`.
+- CI ajustada para executar a árvore completa `tests/`, incluindo os testes top-level dos indicadores.
 - Esta V1 é referência Python experimental; não está certificada, não tem port NTSL e não foi validada candle a candle no Profit One.
 - Frequências em ciclos por candle; períodos em candles. Nenhuma hipótese de tempo de calendário uniforme.
 - Próxima etapa: CI completa, expansão da matriz de sinais sintéticos e quantificação de erro, leakage, deriva e falsos positivos.
