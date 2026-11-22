@@ -56,7 +56,7 @@ This is a rolling single-frequency harmonic fit. It is not a forecast and does n
 ## 5. FES — Fourier Energy Spectrum
 
 Outputs:
-- `total_power`: summed one-sided power within the configured period range;
+- `total_power`: summed raw one-sided FFT power within the configured period range. It scales with input units, window length and taper energy; it is not yet a window-normalized variance estimate and should not be compared across different window lengths;
 - `normalized_entropy`: Shannon entropy of normalized in-band power, divided by the maximum entropy;
 - `concentration`: largest normalized spectral-bin power;
 - `band_power_share`: power share for each caller-supplied period band;
@@ -118,7 +118,7 @@ Only completed bars should be supplied. The library cannot independently know wh
 
 1. Run the complete repository CI and fix any regression.
 2. Expand tests for frequency drift, amplitude modulation, two-tone mixtures, white noise, low-amplitude cycles, abrupt transitions and session gaps.
-3. Quantify period bias, leakage, false detections and phase error across a documented parameter matrix.
+3. Quantify period bias, leakage, false detections and phase error across a documented parameter matrix; normalize spectral power before comparing across window lengths.
 4. Decide the official input series and bar-completion contract for the Profit One adapter.
 5. Design the visual contract for each indicator.
 6. Port one indicator at a time to NTSL only after its Python behaviour is accepted; then compare bar-by-bar outputs.
