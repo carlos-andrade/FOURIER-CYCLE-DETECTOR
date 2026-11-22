@@ -47,7 +47,7 @@
 - It does not infer trade_count, volume, instrument tick size or 60K compliance.
 - Added optional `excel` dependency and CI coverage.
 - CI SUCCESS: run 45072681348, commit 602b8e07438d84f302cb0d625b4bb76aa6748c5e (2026-11-22); 36 tests passed.
-- Last documentation commit with a recorded CI SUCCESS: run 45073501971, commit 5360d193daf6c0c991e713277b63ba6b9e4b26c2. Subsequent documentation-only commits (including the current report update) have no associated workflow run/status; they do not change executable code.
+- Latest test-suite CI SUCCESS: run [45075958293](https://github.com/carlos-andrade/FOURIER-CYCLE-DETECTOR/actions/runs/45075958293), commit `fcf0352475a4860f7b7fdddb3337f549c250f7d9`; 37 tests passed. The preceding run 45075888081 failed because the newly added test fixture violated OHLC bounds; the fixture was corrected and the subsequent full suite passed. The latest documentation-only commits do not change executable code.
 
 ## Temporal price-grid regime check
 
