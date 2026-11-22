@@ -1,44 +1,35 @@
-# Relatório de validação
+# Validation report
 
-## Python mathematical core — 0.2.x
+## Latest verified checkpoints
 
-### Implementado
-- FFT real e espectro unilateral.
-- Correção de amplitude pelo ganho coerente da janela.
-- Seleção de frequência dominante com exclusão de DC e limites configuráveis.
-- Regressão harmônica por mínimos quadrados.
-- Estimação de amplitude, fase, offset, RMSE e R².
-- Energia espectral relativa, concentração e entropia normalizada.
-- Tratamento explícito de sinal constante/energia nula e entradas inválidas.
+### Mathematical core
+- Synthetic robustness CI: SUCCESS, run 45062469716.
+- Band-limited spectral metrics CI: SUCCESS, run 45062857043.
+- These runs verify the tests in their respective commits only; no real market history was tested.
 
-## Testes automatizados
+### B3-aligned offline market data boundary
+- Implemented typed trade events and instrument identity.
+- Enforces timezone-aware event timestamp.
+- Keeps OBSERVED / PROXY / UNKNOWN aggressor states separate.
+- Sequence audit reports duplicates, out-of-order messages and missing sequence values.
+- CSV adapter reads local user-supplied files only.
+- CI run for this layer is pending at commit time of this report.
 
-A suíte original foi aprovada no GitHub Actions (14 casos, incluindo parametrizações), conforme execução registrada no histórico do repositório.
+## B3 source interpretation
 
-### Robustez sintética — nova bateria
-Adicionados testes para:
-- Sinais com duas frequências resolvíveis.
-- Ruído gaussiano determinístico moderado.
-- Contração de amplitude observada em segmentos.
-- Alteração da frequência dominante entre segmentos.
-- Mudança abrupta entre regimes sintéticos.
-- Comparação de janelas para uma frequência centrada em bin.
+Reviewed private project contracts:
+- `CONTRATO_DADOS_B3_V2.0.md`
+- `CONTRATO_CANONICO_INGESTAO_FONTES_EXTERNAS_V2.0.md`
+- `ARQUITETURA_DUAL_COTAHIST_NEGOCIOS_INTRADIARIOS_2026-11-05.md`
+- `PROVEDORES_E_GRANULARIDADE.md`
+- `ativos/futuros/README.md`
 
-**Estado desta nova bateria:** aguardando execução no GitHub Actions. Não declarar aprovada antes de observar o resultado da execução.
+COTAHIST is daily consolidated data, not tick-by-tick. Trade events and order-book feeds have separate contracts and granularities. Tick direction is not treated as aggressor side. UMDF, FIX/FAST, historical replay and other channels require independent entitlement evidence.
 
-## Escopo efetivamente validado até a bateria anterior
-
-Os testes cobrem séries sintéticas determinísticas: frequência/período, amplitude com janela Hann, série constante, entradas inválidas, regressão harmônica, posições amostrais explícitas, entropia/concentração, energia nula e invariância básica do prefixo observado.
-
-## Limitações abertas
-- Nenhum histórico real de WINFUT foi processado.
-- Nenhum ciclo foi validado como persistente ou preditivo no mercado.
-- Não houve walk-forward, validação econômica ou avaliação de custos.
-- O teste de prefixo é uma verificação básica, não uma prova completa de causalidade em tempo real.
-- Não existe equivalência NTSL/Python validada.
-- Nenhum módulo está certificado para negociação.
-
-## Estado
-**TESTED — primitivas matemáticas Python, apenas no escopo dos testes que passaram no CI.**  
-**NOT VALIDATED — comportamento empírico em WINFUT permanece pendente.**  
-**NOT CERTIFIED — nenhuma autorização para operar ou enviar ordens.**
+## Not certified
+- No Profit Pro export has been inspected in this repository.
+- No WINFUT Renko 30R event series has been validated.
+- No real-time provider connection exists.
+- No acquisition, storage licence, retention right or redistribution right is inferred.
+- No backtest profitability or operational performance claim is made.
+- No NTSL equivalence or BrickMaster integration has been performed.
