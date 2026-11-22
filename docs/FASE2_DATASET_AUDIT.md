@@ -65,7 +65,7 @@ A distribuição da ocorrência não é uniforme ao longo do período:
 - Nas 10.511 barras afetadas, 10.443 têm os quatro campos OHLC não múltiplos de 5; 68 têm entre dois e três campos afetados.
 - Nas 2.879 barras restantes, os quatro campos OHLC são múltiplos de 5.
 
-O corte observado entre 2026-10-13 e 2026-10-14 é uma mudança temporal objetiva na representação dos preços. A amostra, isoladamente, não permite determinar se decorre de alteração na origem, no instrumento/vencimento, no ajuste histórico, na exportação ou noutra transformação. Não arredondar, reescalar ou corrigir os valores para os tornar múltiplos de 5 sem evidência da origem. A conformidade deve ser investigada por regime temporal, antes de qualquer certificação.
+O corte observado entre 2026-10-13 e 2026-10-14 é uma mudança temporal objetiva na representação dos preços. No limite entre as sessões, o último fecho de 13/10 é 210.690,00 e a primeira abertura de 14/10 é 210.500,00. A escala nominal permanece semelhante, pelo que a observação não parece uma simples conversão de unidade de 1.000x; isso não identifica a causa nem exclui outras transformações. A amostra, isoladamente, não permite determinar se decorre de alteração na origem, no instrumento/vencimento, no ajuste histórico, na exportação ou noutra transformação. Não arredondar, reescalar ou corrigir os valores para os tornar múltiplos de 5 sem evidência da origem. A conformidade deve ser investigada por regime temporal, antes de qualquer certificação.
 
 ## Interpretação e bloqueios
 
