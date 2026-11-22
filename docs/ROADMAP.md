@@ -30,6 +30,7 @@ Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; PARSER XLSX IMPLE
 - Timezone da coluna Data confirmado pelo utilizador: America/Sao_Paulo; leitura validada em 13.390 registos sem erros.
 - Semântica do timestamp permanece UNKNOWN: ainda não foi confirmado se Data representa abertura ou fecho da barra.
 - Requer reconciliação da origem dos preços, semântica temporal, volume e contagem de negócios antes da certificação do adaptador.
+- A anomalia de grelha de 5 pontos concentra-se nas 121 sessões de 2026-04-22 a 2026-10-13; nas 26 sessões de 2026-10-14 a 2026-11-19 não ocorre. Causa não identificada; não corrigir os preços por arredondamento.
 - Não confundir volume financeiro, quantidade de contratos e número de negócios.
 - COTAHIST é dado diário consolidado e não substitui a série intradiária.
 
