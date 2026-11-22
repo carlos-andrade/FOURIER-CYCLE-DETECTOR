@@ -19,8 +19,13 @@ Estado: IMPLEMENTADA; CI APROVADA em 2026-11-22 (run 45063506164).
 - Adaptador CSV local e read-only.
 - Sem conectividade, scraping, feed, aquisição automática ou promoção de datasets.
 
-## FASE 2 — Dados WINFUT Renko 30R
-Bloqueio: requer exportação local do Profit Pro e validação semântica do contrato, incluindo construção Renko, timestamps, preço, sessão e origem. COTAHIST não substitui intraday.
+## FASE 2 — Dados WINFUT em gráfico 60K Trades (Profit One)
+Estado: BLOQUEADA ATÉ À EXPORTAÇÃO REAL E VALIDAÇÃO SEMÂNTICA.
+- Configuração declarada pelo utilizador: Profit One, gráfico 60K Trades.
+- A série-alvo é construída por contagem de negócios (trades), não por tijolos Renko.
+- Validar na exportação a regra exata de formação/fecho das barras, contagem observada por barra, timestamps, OHLC, volume, sessão, ordenação e tratamento da barra final/incompleta.
+- Não inferir que volume financeiro, quantidade de contratos e número de negócios são a mesma grandeza.
+- COTAHIST é dado diário consolidado e não substitui a série intradiária.
 
 ## FASE 3 — FCD, FHO, FES, FED, FRC e FGSE
 Implementar estados com abstenção explícita, qualidade, causalidade e validade.
