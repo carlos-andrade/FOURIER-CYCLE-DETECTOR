@@ -14,7 +14,7 @@
 - Sequence audit detects gaps, duplicates and out-of-order arrivals.
 - The CSV adapter reads user-supplied local files only.
 - Initial CI exposed a test expectation issue: duplicate repeats were also counted as out-of-order. The rule and test were clarified to avoid double-counting.
-- Corrected CI remains pending.
+- Corrected CI: SUCCESS, run 45063506164, commit 9b78cefc4442ff725844c24c91a79b92a6b84746 (2026-11-22). The `mathematical-tests` job completed successfully, including mathematical, causality and market-data tests.
 
 ## B3 source interpretation
 
