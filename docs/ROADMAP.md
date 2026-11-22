@@ -32,9 +32,17 @@ Estado: AUDITORIA ESTRUTURAL INICIAL CONCLUÍDA COM RESSALVAS; PARSER XLSX IMPLE
 - Requer reconciliação da origem dos preços, semântica temporal, volume e contagem de negócios antes da certificação do adaptador.
 - O contrato B3 V2 exige identidade oficial do instrumento com validade temporal e atributos versionados (vencimento, multiplicador, tick size, moeda, segmento e estado); o catálogo B3 consultado não contém atualmente um registo WINFUT datado que permita fechar essa reconciliação.
 - A anomalia de grelha de 5 pontos concentra-se nas 121 sessões de 2026-04-22 a 2026-10-13; nas 26 sessões de 2026-10-14 a 2026-11-19 não ocorre. Causa não identificada; não corrigir os preços por arredondamento.
-- Implementado diagnóstico reproduzível de grelha candidata por sessão (`audit_candidate_price_grid`), sem presumir tick oficial e sem modificar OHLC; testes sintéticos adicionados; CI aprovada (run 45078417762, 42 testes).
+- Implementado diagnóstico reproduzível de grelha candidata por sessão (audit_candidate_price_grid), sem presumir tick oficial e sem modificar OHLC; CI aprovada (run 45078417762, 42 testes).
 - Não confundir volume financeiro, quantidade de contratos e número de negócios.
 - COTAHIST é dado diário consolidado e não substitui a série intradiária.
+
+## FASE 2.1 — Reconciliação semântica e evidência de origem
+Estado: ABERTA; BLOQUEADA POR EVIDÊNCIA EXTERNA À AMOSTRA ATUAL.
+- Plano de trabalho e critérios de aceitação: docs/FASE2_1_RECONCILIATION_PLAN.md.
+- Workstreams: identidade/vencimento, construção 60K, trade_count/volume, semântica temporal, quebra da grelha de preços, sessões e direitos de uso.
+- Próxima dependência: nova exportação do Profit One com todos os campos disponíveis e registo dos parâmetros do gráfico/provedor.
+- Não alterar OHLC nem inferir trade_count, volume, tick oficial ou semântica temporal.
+- Não certificar a FASE 2 até fechar os gates definidos no plano.
 
 ## FASE 3 — FCD, FHO, FES, FED, FRC e FGSE
 Implementar estados com abstenção explícita, qualidade, causalidade e validade.
