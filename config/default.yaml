@@ -5,15 +5,17 @@ project:
 
 market:
   instrument: WINFUT
-  chart_type: renko
-  renko_label: 30R
-  update_policy: closed_brick_only
+  source_platform: Profit One
+  chart_type: trades
+  chart_label: 60K Trades
+  target_trade_count_per_bar: 60000
+  update_policy: closed_bar_only
 
 analysis:
   windows: [128, 256]
   window_function: hann
-  min_frequency_cycles_per_brick: 0.015625
-  max_frequency_cycles_per_brick: 0.25
+  min_frequency_cycles_per_bar: 0.015625
+  max_frequency_cycles_per_bar: 0.25
   reconstruction_harmonics: 3
 
 safety:
