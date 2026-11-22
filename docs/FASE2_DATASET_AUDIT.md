@@ -107,4 +107,4 @@ Foi acrescentado `audit_candidate_price_grid` em `src/fourier_gyroscope/market_d
 - Não infere calendários de sessões overnight. Para esses mercados, a data de sessão deve ser fornecida por uma camada de calendário explícita.
 - A saída é diagnóstico descritivo, não certificação de tick size ou validade do instrumento.
 
-Testes sintéticos cobrem a segmentação entre sessões, contagem por campo, rejeição de incrementos inválidos e imutabilidade dos OHLC. A aprovação CI desta alteração fica pendente até execução do workflow.
+Testes sintéticos cobrem a segmentação entre sessões, contagem por campo, rejeição de incrementos inválidos e imutabilidade dos OHLC. CI aprovada: run [45078417762](https://github.com/carlos-andrade/FOURIER-CYCLE-DETECTOR/actions/runs/45078417762), commit `8215e8a1e5b18fb003db99cb62505997e14fa830`; a suite completa passou com 42 testes, incluindo os cinco testes novos da auditoria de grelha.
