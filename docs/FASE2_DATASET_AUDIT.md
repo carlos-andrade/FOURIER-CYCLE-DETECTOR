@@ -56,6 +56,17 @@
 
 A recontagem corrigiu o valor anterior de 6.908 para 10.511 registos com pelo menos um OHLC não múltiplo de 5. Esta diferença é uma correção da auditoria, não uma alteração dos dados originais.
 
+## Análise temporal da conformidade dos preços
+
+A distribuição da ocorrência não é uniforme ao longo do período:
+
+- De 2026-04-22 a 2026-10-13: 121 sessões; todas as 10.511 barras desse intervalo apresentam pelo menos um campo OHLC não múltiplo de 5.
+- De 2026-10-14 a 2026-11-19: 26 sessões; 2.879 barras sem qualquer campo OHLC não múltiplo de 5.
+- Nas 10.511 barras afetadas, 10.443 têm os quatro campos OHLC não múltiplos de 5; 68 têm entre dois e três campos afetados.
+- Nas 2.879 barras restantes, os quatro campos OHLC são múltiplos de 5.
+
+O corte observado entre 2026-10-13 e 2026-10-14 é uma mudança temporal objetiva na representação dos preços. A amostra, isoladamente, não permite determinar se decorre de alteração na origem, no instrumento/vencimento, no ajuste histórico, na exportação ou noutra transformação. Não arredondar, reescalar ou corrigir os valores para os tornar múltiplos de 5 sem evidência da origem. A conformidade deve ser investigada por regime temporal, antes de qualquer certificação.
+
 ## Interpretação e bloqueios
 
 Esta auditoria confirma integridade estrutural básica do conjunto OHLC e continuidade do contador por sessão. Não certifica a construção 60K Trades.
