@@ -48,7 +48,7 @@ Estado: ABERTA; BLOQUEADA POR EVIDÊNCIA EXTERNA À AMOSTRA ATUAL.
 - Não certificar a FASE 2 até fechar os gates definidos no plano.
 
 ## FASE 3 — FCD, FHO, FES, FED, FRC e Fourier Gyroscope
-Estado: V1 DE REFERÊNCIA IMPLEMENTADA; CORREÇÃO DO FED EM VALIDAÇÃO CI; CERTIFICAÇÃO PENDENTE.
+Estado: V1 DE REFERÊNCIA IMPLEMENTADA; CORREÇÃO DO FED INTEGRADA E CI APROVADA; CERTIFICAÇÃO PENDENTE.
 - Primeira implementação integrada em `src/fourier_gyroscope/indicators_v1.py`.
 - FCD: frequência dominante, período em candles e quota de potência do pico.
 - FHO: amplitude, fase e oscilador harmónico ajustado na frequência dominante.
@@ -61,8 +61,9 @@ Estado: V1 DE REFERÊNCIA IMPLEMENTADA; CORREÇÃO DO FED EM VALIDAÇÃO CI; CER
 - CI ajustada para executar a árvore completa `tests/`, incluindo os testes top-level dos indicadores.
 - Esta V1 é referência Python experimental; não está certificada, não tem port NTSL e não foi validada candle a candle no Profit One.
 - Frequências em ciclos por candle; períodos em candles. Nenhuma hipótese de tempo de calendário uniforme.
-- CI da PR #7 encontrou 1 falha em 53 testes: o FED não detetava colapso de amplitude ao comparar amplitudes FHO apenas em candles consecutivos; 52 testes passaram. Correção proposta: referência de amplitude com lag de 64 candles e teste explícito do atraso máximo neste cenário sintético.
-- Próxima etapa: executar CI completa após a correção; depois quantificar erro, leakage, deriva e falsos positivos na matriz sintética.
+- PR #8 integrada: FED compara amplitude FHO atual com referência de 64 candles; CI Python e Scope Guard aprovadas (runs 45085663623 e 45085663724).
+- Nova frente de validação: erro de frequência off-bin e estabilidade de período para janelas de 64, 128, 256 e 512 candles; testes em validação.
+- Próxima etapa: quantificar leakage, erro de amplitude/fase, deriva, modulação e falsos positivos; manter certificação pendente.
 
 ## FASE 4 — Validação estatística dos indicadores
 Estabilidade espectral, resolução, leakage, erro de período/amplitude/fase, falsos positivos, abstenção, ruído, deriva de frequência, não estacionariedade e causalidade. Não é backtest de rentabilidade.
